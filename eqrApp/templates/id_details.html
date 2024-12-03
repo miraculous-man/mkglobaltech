@@ -1,0 +1,101 @@
+{% load qr_code %}
+{% load static %}
+<style>
+    #uni_modal .modal-footer {
+        display: none
+    }
+    
+    #uni_modal .modal-sub-footer {
+        display: flex
+    }
+    
+    #card-qr,
+    #card-avatar {
+        width: 9rem;
+        height: 9rem;
+    }
+</style>
+<link rel="stylesheet" href="{% static './id_card/idCard.css' %}">
+
+<div class="container-fluid" id="e-details">
+    <div class="d-flex w-100 justify-content-center my-4">
+    </div>
+   <center>  {% for picture in uploaded_image %}                                  
+    {% for picture in uploaded_image %}                                  
+    {% if picture.id == 2 %}
+    <h2>.::{{picture.news_feed}}::.</h2>
+    {% endif %}
+     {% endfor %}</center> 
+
+    <div class="lh-1">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <dl>
+                    <dt>User Name</dt>
+                    <dd>{{student.student.get_full_name}}</dd>
+                    <dt>Class</dt>
+                    <dd>{{student.department}}</dd>
+                    <dt>level</dt>
+                    <dd>{{student.level}}</dd> 
+                    <dt>Address</dt>
+                    <dd>{{student.student.address}}</dd>
+                </dl>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <dl>
+                    <dt>Gender</dt>
+                    <dd>{{student.student.gender}}</dd>
+                    <dt>Date of Birth</dt>
+                    <dd>{{student.student.dob|date:'M d, Y'}}</dd>
+                    <dt>Contact #</dt>
+                    <dd>{{student.student.phone}}</dd>
+                    <dt>Email</dt>
+                    <dd>{{student.student.email}}</dd>
+                </dl>
+            </div>
+        </div>
+    
+    </div>
+</div>
+<div class="container">
+    <div class="padding">
+        <div class="font">
+            <div class="top">
+                <img style="width: 100px; height: 100px;" src="{% if student.student.picture %}{{student.student.picture.url}}{% endif %}" id="card-avatar" class="img-thumbnail" alt="">
+            </div>
+            <div class="bottom">
+                <p>{{student.student.get_full_name}}</p>
+                <p class="desi">{{student.student.get_user_role}}</p>
+                <div class="barcode">
+                    <img src="qr sample.png">
+                </div>
+                <br>
+                <p class="no">{{student.student.phone}}</p>
+                <p class="no">part-1,89 harinadad d...sdv..sdf..sfd..sd.</p>
+            </div>
+        </div>
+    </div>
+    <div class="back">
+        <h1 class="Details">information</h1>
+        <hr class="hr">
+        <div class="details-info">
+            <p><b>Email : </b></p>
+            <p>Planicsdevloper@gmail.com</p>
+            <p><b>Mobile No: </b></p>
+            <p>8460304196</p>
+            <p><b>Office Address:</b></p>
+            <p>part-1,89 harinadad d...sdv..sdf..sfd..sd.road,india</p>
+            </div>
+            <div class="logo">
+                <img src="barcode.PNG">
+            </div>
+
+            
+            <hr>
+        </div>
+    </div>
+</div>
+<script>
+    var emp_edit_url = "{% url 'edit-employee' student.student.pk %}"
+    var emp_delete_url = "{% url 'delete-employee' student.student.pk %}"
+</script>

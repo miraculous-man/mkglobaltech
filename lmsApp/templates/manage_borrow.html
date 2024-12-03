@@ -1,0 +1,88 @@
+{% extends 'base1.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>&rsaquo;</i> 
+    <a style="color: aliceblue;" href="{% url 'programs' %}" class="primary1">Borrow</a> <i>&rsaquo;</i>Books</div>
+<br>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>{{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>{{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<style> body {
+    background-image:url('{% static "assets/default/img/wallpaper.jpg" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+   .bag{
+            background-image:url("{% static 'assets/default/img/bg1.jpg' %}");
+            background-size:cover;
+            background-repeat:no-repeat;
+            background-position:center center;
+        }
+</style>
+<div class="row body">
+<div class="col-md-6 mx-auto">
+    <div class="card">
+        <p class="form-title"> Borrow Books </p>
+        <div class="p-3 bag"><br>
+            <form action="" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <b>{{ borrow.student.label }}</b><p>{{ borrow.student}}</p>
+                    <span class="danger">{{ borrow.student.errors }}</span>
+                </div>
+                <b>{{ borrow.book.label }}</b><p>{{  borrow.book }}</p>
+                <span class="danger"> {{  borrow.book.errors }}</span>
+                <div class="form-group">
+                    <b>{{ borrow.return_date.label }}</b><p>{{ borrow.return_date}}</p>
+                    <span class="danger"> {{  borrow.return_date.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ borrow.borrowing_date.label }}</b><p>{{ borrow.borrowing_date }}</p>
+                    <span class="danger"> {{ borrow.borrowing_date.errors }}</span>
+                </div>
+                
+                <label for="status" class="control-label">Status</label>
+                <select type="text" id="status" name="status" class="form-select form-select-sm rounded-0" required>
+                    {% if borrow.status == '1' %}
+                    <option value="1" selected>Pending</option>
+                    {% else %}
+                    <option value="1">Pending</option>
+                    {% endif %}
+                    {% if  borrow.status == '2' %}
+                    <option value="2" selected>Returned</option>
+                    {% else %}
+                    <option value="2">Returned</option>
+                    {% endif %}
+                </select>
+                <label for="fine" class="control-label">Fine</label>
+                <select type="text" id="fine" name="fine" class="form-select form-select-sm rounded-0" required>
+                    {% if borrow.fine == '1' %}
+                    <option value="1" selected>Fined</option>
+                    {% else %}
+                    <option value="1">Fined</option>
+                    {% endif %}
+                    {% if  borrow.fine == '2' %}
+                    <option value="2" selected>Not Fined</option>
+                    {% else %}
+                    <option value="2">Not Fined</option>
+                    {% endif %}
+                </select>
+                <input class="btn btn-outline-primary" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

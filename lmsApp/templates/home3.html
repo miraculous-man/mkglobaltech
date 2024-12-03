@@ -1,0 +1,390 @@
+{% extends "base1.html" %}  {% load humanize %} {% load customfilter %} 
+
+{% block title %} Library | mkglobal {% endblock title %}
+{% load static %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'error' %}
+<div class="alert alert-danger">
+	<i class="fas fa-exclamation-circle"></i>{{ message }}
+</div>
+{% else %}
+<div class="alert alert-success">
+	<i class="fas fa-check-circle"></i>{{ message }}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+<style>
+    body {
+        background-image:url('{% static "assets/default/img/wallpaper.jpg" %}');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    main {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: auto;
+    }
+    
+    #logo-img {
+        height: 7em;
+        width: 7em;
+        object-fit: cover;
+        object-position: center center;
+    }
+    
+    #page-title {
+        font-size: 3em;
+        color: #f7f7f7;
+        font-family: cursive;
+        text-shadow: 2px 2px 12px #b7652a;
+    }
+</style>
+<style>
+	.chart-wrap {
+		position: relative;
+		padding: 1rem;
+		transition: .5s;
+		background-color: #fff;
+		border-radius: 10px;
+	}
+
+	.fa-expand-alt {
+		display: none;
+		position: absolute;
+		top: .5rem;
+		right: .5rem;
+		padding: .5rem;
+		cursor: pointer;
+		transition: .3s;
+	}
+
+	.fa-expand-alt:hover {
+		background-color: #f1f1f1;
+	}
+
+	.chart-wrap:hover {
+		box-shadow: 0 0 0 1px inset #666;
+	}
+
+	.chart-wrap:hover .fa-expand-alt {
+		display: block;
+	}
+
+	.full-screen {
+		transform: translateY(100%);
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 999;
+		max-width: 100%;
+		max-height: 100%;
+		-ms-flex: 0 0 100%;
+		flex: 0 0 100%;
+		background-color: #fff;
+		/* For Internet Explorer */
+		box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5) !important;
+		/* For other browsers */
+		box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5) !important;
+		transform-origin: bottom left;
+		animation: popupAnim forwards alternate .5s ease-in-out;
+		overflow: auto;
+	}
+
+	.full-screen .fa-expand-alt {
+		display: block;
+	}
+
+	@keyframes popupAnim {
+		from {
+			transform: translateY(100%);
+		}
+
+		to {
+			transform: translateY(0);
+		}
+	}
+
+	.users-count .card-count {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #fff;
+	}
+
+	.users-count .card-count h2 {
+		font-weight: 1000;
+	}
+
+	.users-count .card-count h3 {
+		flex: 0 0 40%;
+		border-right: 1px solid rgb(230, 230, 230);
+	}
+
+	.users-count .card-count h3 i {
+		display: inline-flex;
+		width: 60px;
+		height: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+	}
+
+	.bg-light-aqua {
+		background-color: rgba(86, 224, 224, 0.5);
+		box-shadow: 0 0 0 10px rgba(86, 224, 224, 0.1);
+		color: #fff;
+	}
+
+	.bg-light-orange {
+		background-color: rgba(253, 174, 28, 0.5);
+		box-shadow: 0 0 0 10px rgba(253, 174, 28, 0.1);
+		color: #fff;
+	}
+
+	.bg-light-purple {
+		background-color: rgba(203, 31, 255, 0.5);
+		box-shadow: 0 0 0 10px rgba(203, 31, 255, 0.1);
+		color: #fff;
+	}
+
+	.bg-light-red {
+		background-color: rgba(255, 19, 157, 0.5);
+		box-shadow: 0 0 0 10px rgba(255, 19, 157, 0.1);
+		color: #fff;
+	}
+
+	.activities ul {
+		padding-left: .5rem;
+	}
+
+	.activities ul li {
+		list-style-type: disc;
+	}
+</style>
+<br><br><br>
+<div class="page-header body">
+	<h1 class="title-1 mb-5" style="color: #f1f1f1;">Dashboard</h1>
+	<div class="btn-group">
+		<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+			aria-expanded="false">
+			<i class="fas fa-cog"></i>
+		</button>
+		<div class="dropdown-menu dropdown-menu-right">
+			<h6 class="dropdown-header">Dashboard settings</h6>
+			<button class="dropdown-item" type="button">Display row</button>
+			<button class="dropdown-item" type="button">Display column</button>
+			<button class="dropdown-item" type="button">Display table</button>
+			<hr>
+			<button class="dropdown-item" type="button">Manage dashboard</button>
+		</div>
+	</div>
+</div>
+<h2 class="fw-bolder" style="color: #f1f1f1" >Welcome, {{request.user.first_name}}&nbsp;{{request.user.last_name}}!</h2>
+<div class="body">
+<div class="row users-count px-3">
+	<div class="col-md-3 mb-3 px-2">
+		<div class="card-count p-3">
+			<h3><i class="fas fa-users bg-light-aqua"></i></h3>
+			<div class="text-right">
+				Active Students
+				<h2>{{students|intcomma}}</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 mb-3 px-2">
+		<div class="card-count p-3">
+			<h3><i class="fas fa-users bg-light-orange"></i></h3>
+			<div class="text-right">
+				Active Lecturers
+				<h2>{{Lecturers|intcomma}}</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 mb-3 px-2">
+		<div class="card-count p-3">
+			<h3><i class="fas fa-users bg-light-purple"></i></h3>
+			<div class="text-right">
+				Active Categories
+				<h2>{{categories|intcomma}}</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 mb-3 px-2">
+		<div class="card-count p-3">
+			<h3><i class="fas fa-users bg-light-red"></i></h3>
+			<div class="text-right">
+				Active Sub Categories
+				<h2>{{sub_categories|intcomma}}</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 mb-3 px-2">
+		<div class="card-count p-3">
+			<h3><i class="fas fa-users bg-light-red"></i></h3>
+			<div class="text-right">
+				Librarian
+				<h2>300</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 mb-3 px-2">
+		<div class="card-count p-3">
+			<h3><i class="fas fa-users bg-light-purple"></i></h3>
+			<div class="text-right">
+				Books
+				<h2>{{books|intcomma}}</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 mb-3 px-2">
+		<div class="card-count p-3">
+			<h3><i class="fas fa-users bg-light-orange"></i></h3>
+			<div class="text-right pl-2">
+				pending transactions
+				<h2>{{pending|intcomma}}</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 mb-3 px-2">
+		<div class="card-count p-3">
+			<h3><i class="fas fa-users bg-light-aqua"></i></h3>
+			<div class="text-right">
+				Total Transactions
+				<h2>{{transactions|intcomma}}</h2>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<footer><div id="input-nav" class="p-2">
+    <a href="/"> Home </a> lybrary
+{% if topbar %} {% block TopNavigation1 %} {% include "TopNavigation1.html" %} {% endblock TopNavigation1 %} {% endif %}
+
+</div>
+</footer>
+{% endblock %}
+<!--Section: Content-->
+<section class="">
+    <h2 class="fw-bolder">Welcome, {{request.user.first_name}}&nbsp;{{request.user.last_name}}!</h2>
+    <hr>
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 px-1 pb-2">
+            <div class="card card-default rounded-0 shadow bg-primary bg-gradient border-0 text-light">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mx-0 w-100 align-items-center">
+                            <div class="col-3">
+                                <i class="fs-1 text-light fa fa-th-list"></i>
+                            </div>
+                            <div class="col-9">
+                                <h1 class="text-end">{{categories|intcomma}}</h2>
+                            </div>
+                            <div class="col-12 text-end"><b>Active Categories</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 px-1 pb-2">
+            <div class="card card-default rounded-0 shadow bg-gradient bg-dark bg-opacity-75 text-light">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mx-0 w-100 align-items-center">
+                            <div class="col-3">
+                                <i class="fs-1 text-light fa fa-list"></i>
+                            </div>
+                            <div class="col-9">
+                                <h1 class="text-end">{{sub_categories|intcomma}}</h2>
+                            </div>
+                            <div class="col-12 text-end"><b>Active Sub Categories</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 px-1 pb-2">
+            <div class="card card-default rounded-0 shadow bg-gradient bg-success bg-opacity-75 text-light">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mx-0 w-100 align-items-center">
+                            <div class="col-3">
+                                <i class="fs-1 text-light fa fa-user-friends"></i>
+                            </div>
+                            <div class="col-9">
+                                <h1 class="text-end">{{students|intcomma}}</h2>
+                            </div>
+                            <div class="col-12 text-end"><b>Active Students</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 px-1 pb-2">
+            <div class="card card-default rounded-0 shadow bg-gradient bg-warning bg-opacity-75 text-light">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mx-0 w-100 align-items-center">
+                            <div class="col-3">
+                                <i class="fs-1 text-light fa fa-book"></i>
+                            </div>
+                            <div class="col-9">
+                                <h1 class="text-end">{{books|intcomma}}</h2>
+                            </div>
+                            <div class="col-12 text-end"><b>Active Books</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 px-1 pb-2">
+            <div class="card card-default rounded-0 shadow bg-gradient bg-secondary text-light">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mx-0 w-100 align-items-center">
+                            <div class="col-3">
+                                <i class="fs-1 text-light fa fa-book-open"></i>
+                            </div>
+                            <div class="col-9">
+                                <h1 class="text-end">{{pending|intcomma}}</h2>
+                            </div>
+                            <div class="col-12 text-end"><b>Pending Transactions</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 px-1 pb-2">
+            <div class="card card-default rounded-0 shadow bg-gradient bg-dark text-light">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mx-0 w-100 align-items-center">
+                            <div class="col-3">
+                                <i class="fs-1 text-light fa fa-book-open"></i>
+                            </div>
+                            <div class="col-9">
+                                <h1 class="text-end">{{transactions|intcomma}}</h2>
+                            </div>
+                            <div class="col-12 text-end"><b>Total Transactions</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+

@@ -1,0 +1,89 @@
+{% extends 'base1.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>&rsaquo;</i> 
+    <a href="{% url 'programs' %}" class="primary1">Class</a> <i>&rsaquo;</i> Add</div>
+<br>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>{{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>{{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<style> body {
+    background-image:url('{% static "assets/default/img/wallpaper.jpg" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+   .bag{
+            background-image:url("{% static 'assets/default/img/bg1.jpg' %}");
+            background-size:cover;
+            background-repeat:no-repeat;
+            background-position:center center;
+        }
+</style>
+<div class="row body">
+<div class="col-md-6 mx-auto">
+    <div class="card">
+        <p class="form-title"> SubCategory Add Form</p>
+        <div class="p-3 bag"><br>
+            <form action="" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <b>{{ book.isbn.label }}</b><p>{{ book.isbn}}</p>
+                    <span class="danger">{{ book.isbn.errors }}</span>
+                </div>
+              
+                <b>{{ book.sub_category.label }}</b><p>{{ book.sub_category }}</p>
+                <span class="danger"> {{ book.sub_category.errors }}</span>
+                <div class="form-group">
+                    <b>{{ book.title.label }}</b><p>{{ book.title }}</p>
+                    <span class="danger"> {{ book.title.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ book.description.label }}</b><p>{{ book.description }}</p>
+                    <span class="danger"> {{ book.description.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ book.author.label }}</b><p>{{ book.author }}</p>
+                    <span class="danger"> {{ book.author.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ book.publisher.label }}</b><p>{{ book.publisher}}</p>
+                    <span class="danger"> {{ book.publisher.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>Date Published </b><p>{{ book.date_published}}</p>
+                    <span class="danger"> {{book.date_published.error}}</span>
+                </div>
+                <label for="status" class="control-label">Status</label>
+                <select type="text" id="status" name="status" class="form-select form-select-sm rounded-0" required>
+                    {% if book.status == '1' %}
+                    <option value="1" selected>Active</option>
+                    {% else %}
+                    <option value="1">Active</option>
+                    {% endif %}
+                    {% if book.status == '2' %}
+                    <option value="2" selected>Inactive</option>
+                    {% else %}
+                    <option value="2">Inactive</option>
+                    {% endif %}
+                </select>
+            
+                <input class="btn btn-outline-primary" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,226 @@
+{% extends 'base1.html' %} {% load static %}
+
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>&rsaquo;</i> Students</div>
+
+{% if request.user.is_superuser %}
+<a style="color: aliceblue;" class="add-button" href="{% url 'save-book' %}"><i class="fas fa-plus"></i>Add Book</a>
+{% endif %}
+
+<div class="title-1"><i class="fas fa-user-graduate"></i>Students List</div>
+<div class="title-line"></div>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>{{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>{{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<style> body {
+    background-image:url('{% static "assets/default/img/wallpaper.jpg" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+}</style>
+
+<div class="content-center body">
+    <form class="search-form" action="" method="GET">
+        <input class="au-input" type="text" id="student_id" name="student_id" placeholder="ID No." value="{{ request.GET.student_id }}"/>
+        <input class="au-input" type="text" name="name" placeholder="Name" value="{{ request.GET.name }}"/>
+        <input class="au-input" type="text" name="department" placeholder="Department" value="{{ request.GET.department }}"/>
+        <button class="btn btn-light" type="submit">
+            <i class="fas fa-search"></i> filter
+        </button>
+    </form>
+</div>
+<!-- <form class="search-form">
+    <ul>
+        <li class="space-between"><input class="form-control" type="text" name="name" placeholder="Name"></li>
+        <li class="space-between"><input class="form-control" type="text" name="email" placeholder="Email"></li>
+        <li class="space-between"><input class="form-control" type="text" name="course" placeholder="Course"></li>
+        <button class="search-btn" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </ul>
+</form> -->
+
+{% if access == False %}
+
+<div class="alert bg-danger">
+    <h1 class="text-light text-center">Access Denied</h1>
+    <h5 class="text-light text-center">you don't have access to this page. </h5>
+</div>
+
+{% endif %}
+<div class="table-responsive table-shadow table-light table-striped m-0 mt-5 body">
+    <table class="table">
+        <table class="table table-bordered table-striped" id="book-tbl">
+            <colgroup>
+                <col width="5%">
+                <col width="15%">
+                <col width="20%">
+                <col width="15%">
+                <col width="20%">
+                <col width="15%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Date Added</th>
+                    <th class="text-center">SubCategory/Book</th>
+                    <th class="text-center">Book</th>
+                    <th class="text-center">isbn</th>
+                    <th class="text-center">Author</th>
+                    <th class="text-center">Publisher</th>
+                    <th class="text-center">Date Published</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
+                    <th class="text-center">Description</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                    <td>{{ book.date_added|date:"Y-m-d h:i A"}}</td>
+                    <td>
+                        <div class="lh-1">
+                            <div>{{ book.sub_category.category.name}}</div>
+                            <div>{{ book.sub_category.name}}</div>
+                        </div>
+                    </td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.isbn}}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.publisher}}</td>
+                    <td>{{ book.date_published }}</td>
+                    <td class="text-center">
+                        {% if book.status == '1' %}
+                        <span class="badge badge-success bg-gradient bg-success px-3 rounded-pill bg-opacity-75 text-sm py-1">Active</span> {% else %}
+                        <span class="badge badge-secondary bg-gradient bg-secondary px-3 rounded-pill bg-opacity-75 text-sm py-1">Inactive</span> {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <div class="dropdown">
+                            <button class="btn btn-light btn-sm rounded-0 border dropdown-toggle" type="button" id="abtn{{book.pk}}" data-bs-toggle="dropdown" aria-expanded="false">
+                              Action
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="abtn{{cat.pk}}">
+                                <li><a class="dropdown-item edit-data" href="{% url 'manage-book-pk' book.pk %}" ><i class="fa fa-edit text-primary"></i> Edit</a></li>
+                                <li><a class="dropdown-item delete-data" href="{% url 'delete-book' book.pk %}" ><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>{{ book.description }}</td>
+
+                </tr>
+                     
+            {% empty %}
+            <tr>
+                  <td></td>
+                  <td></td>
+                  <td>
+                  <span class="text-danger">
+                    <i class="far fa-frown"></i>No Student.
+                    {% if request.user.is_superuser %}
+                    <a href="{% url 'add_student' %}">
+                    <i class="primary" style="font-size: 22px;">
+                       Add Student Now.
+                    </i>
+                    {% endif %}
+                    </a>
+                  </span>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}           
+    </table>
+</div>  
+{% if topbar %} {% block TopNavigation1 %} {% include "TopNavigation1.html" %} {% endblock TopNavigation1 %} {% endif %}
+
+{% endblock content %}
+
+    <script>
+        $(function() {
+            $('#create_new').click(function() {
+                uni_modal("<i class='fa fa-plus'></i> Add New Book", "{% url 'manage-book' %}", "modal-lg")
+            })
+            $('.edit-data').click(function() {
+                uni_modal("<i class='fa fa-edit'></i> Edit Book Details", $(this).attr('data-url'), "modal-lg")
+            })
+            $('.view-data').click(function() {
+                uni_modal("<i class='fa fa-th-list'></i> Book Details", $(this).attr('data-url'))
+            })
+            $('.view_image').click(function() {
+                var img = $(this).attr('data-img-url')
+                $('#viewer_modal #img-viewer-field').attr('src', img)
+                $('#viewer_modal').modal('show')
+            })
+            $('.delete-data').click(function() {
+                _conf("Are you sure to delete this Book?", 'delete_book', ["'" + $(this).attr('data-url') + "'"])
+            })
+            $('#book-tbl').find('td, th').addClass('px-2 py-1 align-middle')
+            $('#book-tbl').DataTable({
+                columnDefs: [{
+                    orderable: false,
+                    targets: [4]
+                }],
+                lengthMenu: [
+                    [25, 50, 100, -1],
+                    [25, 50, 100, "All"]
+                ]
+            })
+        })
+    
+        function delete_book(url) {
+    
+            var _this = $('#confirm_modal .modal-body')
+            $('.err-msg').remove();
+            var el = $('<div>')
+            el.addClass("alert alert-danger err-msg")
+            el.hide()
+            start_loader()
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": "{{csrf_token}}"
+                },
+                url: url,
+                dataType: 'JSON',
+                error: err => {
+                    console.log(err)
+                    alert("an error occurred.")
+                    end_loader()
+                },
+                success: function(resp) {
+                    if (resp.status == 'success') {
+                        location.reload()
+                    } else if (!!resp.msg) {
+                        el.html(resp.msg)
+                        _this.prepend(el)
+                        el.show()
+                    } else {
+                        el.html("An error occurred")
+                        _this.prepend(el)
+                        el.show()
+                    }
+                    end_loader()
+                }
+    
+            })
+        }
+    </script>
+    
+</section>

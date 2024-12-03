@@ -1,0 +1,143 @@
+{% extends 'base1.html' %} {% load static %}
+
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>&rsaquo;</i> Students</div>
+
+{% if request.user.is_superuser %}
+<a style="color: aliceblue;" class="add-button" href="{% url 'save-sub_category' %}"><i class="fas fa-plus"></i>Add Sub cart.</a>
+{% endif %}
+
+<div class="title-1"><i class="fas fa-user-graduate"></i>Students List</div>
+<div class="title-line"></div>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>{{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>{{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<style> body {
+    background-image:url('{% static "assets/default/img/wallpaper.jpg" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+}</style>
+
+<div class="content-center body">
+    <form class="search-form" action="" method="GET">
+        <input class="au-input" type="text" id="student_id" name="student_id" placeholder="ID No." value="{{ request.GET.student_id }}"/>
+        <input class="au-input" type="text" name="name" placeholder="Name" value="{{ request.GET.name }}"/>
+        <input class="au-input" type="text" name="department" placeholder="Department" value="{{ request.GET.department }}"/>
+        <button class="btn btn-light" type="submit">
+            <i class="fas fa-search"></i> filter
+        </button>
+    </form>
+</div>
+<!-- <form class="search-form">
+    <ul>
+        <li class="space-between"><input class="form-control" type="text" name="name" placeholder="Name"></li>
+        <li class="space-between"><input class="form-control" type="text" name="email" placeholder="Email"></li>
+        <li class="space-between"><input class="form-control" type="text" name="course" placeholder="Course"></li>
+        <button class="search-btn" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </ul>
+</form> -->
+
+{% if access == False %}
+
+<div class="alert bg-danger">
+    <h1 class="text-light text-center">Access Denied</h1>
+    <h5 class="text-light text-center">you don't have access to this page. </h5>
+</div>
+
+{% endif %}
+<div class="table-responsive table-shadow table-light table-striped m-0 mt-5 body">
+    <table class="table">
+        <table class="table table-bordered table-striped" id="book-tbl">
+            <colgroup>
+                <col width="5%">
+                <col width="15%">
+                <col width="20%">
+                <col width="15%">
+                <col width="20%">
+                <col width="15%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">DateTime</th>
+                    <th class="text-center">Category/Sub Category</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tbody>
+                    {% for cat in sub_category %}
+                    <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td>{{ cat.date_created|date:"Y-m-d H:i" }}</td>
+                        <td>
+                            <div class="lh-1">
+                                <div>{{ cat.category}}</div>
+                                <div>{{ cat.name}}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="m-0 truncate-1">{{ cat.description|safe }}</p>
+                        </td>
+                        <td class="text-center">
+                            {% if cat.status == '1' %}
+                            <span class="badge badge-success bg-gradient bg-success px-3 rounded-pill bg-opacity-75 text-sm py-1">Active</span> {% else %}
+                            <span class="badge badge-secondary bg-gradient bg-secondary px-3 rounded-pill bg-opacity-75 text-sm py-1">Inactive</span> {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <button class="btn btn-light btn-sm rounded-0 border dropdown-toggle" type="button" id="abtn{{cat.pk}}" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Action
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="abtn{{cat.pk}}">
+                                    <li><a class="dropdown-item edit-data" href="{% url 'manage-sub_category-pk' cat.pk %}" ><i class="fa fa-edit text-primary"></i> Edit</a></li>
+                                    <li><a class="dropdown-item delete-data" href="{% url 'delete-sub_category' cat.pk %}" ><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            <tr>                    
+                {% if forloop.counter  == '' %}
+                  <td></td>
+                  <td></td>
+                  <td>
+                  <span class="text-danger">
+                    <i class="far fa-frown"></i>No Categories.
+                    <a href="{% url 'asave-sub_category' %}">
+                    <i class="primary" style="font-size: 22px;">
+                       Add Categories Now.
+                    </i>
+                    </a>
+                  </span>
+                </td>
+                {% endif %}
+
+            </tr>
+            
+    </table>
+</div>  
+{% if topbar %} {% block TopNavigation1 %} {% include "TopNavigation1.html" %} {% endblock TopNavigation1 %} {% endif %}
+
+{% endblock content %}
+

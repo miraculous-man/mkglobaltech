@@ -1,0 +1,73 @@
+{% extends 'base1.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>&rsaquo;</i> 
+    <a href="{% url 'programs' %}" class="primary1">Class</a> <i>&rsaquo;</i> Add</div>
+<br>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>{{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>{{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<style> body {
+    background-image:url('{% static "assets/default/img/wallpaper.jpg" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+   .bag{
+            background-image:url("{% static 'assets/default/img/bg1.jpg' %}");
+            background-size:cover;
+            background-repeat:no-repeat;
+            background-position:center center;
+        }
+</style>
+<div class="row body">
+<div class="col-md-6 mx-auto">
+    <div class="card">
+        <p class="form-title"> SubCategory Add Form</p>
+        <div class="p-3 bag"><br>
+            <form action="" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <b>{{ sub_category.category.label }}</b><p>{{ sub_category.category}}</p>
+                    <span class="danger">{{ sub_category.category.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ sub_category.name.label }}</b><p>{{ sub_category.name }}</p>
+                    <span class="danger">{{ sub_category.name.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ sub_category.description.label }}</b><p>{{ sub_category.description }}</p>
+                    <span class="danger"> {{ sub_category.description.errors }}</span>
+                </div>
+                <label for="status" class="control-label">Status</label>
+                <select type="text" id="status" name="status" class="form-select form-select-sm rounded-0" required>
+                    {% if sub_category.status == '1' %}
+                    <option value="1" selected>Active</option>
+                    {% else %}
+                    <option value="1">Active</option>
+                    {% endif %}
+                    {% if sub_category.status == '2' %}
+                    <option value="2" selected>Inactive</option>
+                    {% else %}
+                    <option value="2">Inactive</option>
+                    {% endif %}
+                </select>
+                <input class="btn btn-outline-primary" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

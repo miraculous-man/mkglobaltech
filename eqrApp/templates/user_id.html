@@ -1,0 +1,301 @@
+{% load qr_code %}
+{%load static%}
+
+<style>
+    #uni_modal .modal-footer {
+        display: none
+    }
+    
+    #uni_modal .modal-sub-footer {
+        display: flex
+    }
+    
+    .id-card {
+        width: 3in;
+        height: 52vh;
+        border: 2px solid var(--bs-dark);
+        padding: 2rem 1.5rem;
+    }
+    
+    #card-qr,
+    #card-avatar {
+        width: 9rem;
+        height: 9rem;
+    }
+    *{
+    margin: 00px;
+    padding: 00px;
+    box-sizing: content-box;
+}
+
+.containers {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e6ebe0;
+    flex-direction: row;
+    flex-flow: wrap;
+
+}
+
+.font{
+    height: 375px;
+    width: 250px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.top{
+    height: 30%;
+    width: 100%;
+    background-color: #8338ec;
+    position: relative;
+    z-index: 5;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.bottom{
+    height: 70%;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.top img{
+    height: 100px;
+    width: 100px;
+    background-color: #e6ebe0;
+    border-radius: 10px;
+    position: absolute;
+    top:60px;
+    left: 75px;
+}
+.bottom p{
+    position: relative;
+    top: 60px;
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 20px;
+    text-emphasis: spacing;
+}
+.bottom .desi{
+    font-size:12px;
+    color: grey;
+    font-weight: normal;
+}
+.bottom .no{
+    font-size: 15px;
+    font-weight: normal;
+}
+.barcode img
+{
+    height: 65px;
+    width: 65px;
+    text-align: center;
+    margin: 5px;
+}
+.barcode{
+    text-align: center;
+    position: relative;
+    top: 70px;
+}
+
+.back
+{
+    height: 375px;
+    width: 250px;
+    border-radius: 10px;
+    background-color: #8338ec;
+
+}
+.qr img{
+    height: 80px;
+    width: 100%;
+    margin: 20px;
+    background-color: white;
+}
+.Details {
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 25px;
+}
+
+
+.details-info{
+    color: white;
+    text-align: left;
+    padding: 5px;
+    line-height: 20px;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    line-height: 22px;
+}
+
+.logo {
+    height: 40px;
+    width: 150px;
+    padding: 40px;
+}
+
+.logo img{
+    height: 100%;
+    width: 100%;
+    color: white ;
+
+}
+.padding{
+    padding-right: 20px;
+}
+
+@media screen and (max-width:400px)
+{
+    .containers{
+        height: 130vh;
+    }
+    .containers .front{
+        margin-top: 50px;
+    }
+}
+@media screen and (max-width:600px)
+{
+    .containers{
+        height: 130vh;
+    }
+    .containers .front{
+        margin-top: 50px;
+    }
+
+}
+</style>
+
+<div class="containers">
+    <div class="padding">
+        <div class="font">
+
+            <div class="top">
+                {% for picture in uploaded_image %}                                  
+                {% if picture.id == 2 %}
+                <h2 style="color: #e6ebe0;">{{picture.news_feed}}</h2>
+                {% endif %}
+                 {% endfor %}
+
+                <img style="width: 100px; height: 80px;" src="{% if employee.picture %}{{employee.picture.url}}{% endif %}" id="card-avatar" class="img-thumbnail" alt="">
+            </div>
+            <div class="bottom">
+                <p>{{employee.get_full_name}}</p>
+                <div class="barcode">
+                    <img style="width: 80px; height: 80px;" src="{% qr_url_from_text employee.id size=5 version=1 image_format='png' %}" id="card-qr" alt="">
+                </div>
+                <br>
+                <hr class="hr">
+
+                <p class="no">birthday: {{employee.dob}} <br>{{employee.get_user_role}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="back">
+        <h1 class="Details">information</h1>
+        <hr class="hr">
+        <div class="details-info">
+            <p><b>Email : </b></p>
+            <p>{{employee.email}}</p>
+            <p><b>Mobile No: </b></p>
+            <p>{{employee.phone}}</p>
+            {% for picture in uploaded_image %}                                  
+            {% if picture.id == 2 %}
+            <p><b>Office Address:</b></p>
+            <p>{{picture.news_feed}}</p>
+             {% endif %}
+            {% endfor %}
+            <div >
+                <img  src="{% static './id_card/barcode.PNG' %}">
+            </div>
+        </div>
+            
+            <hr>
+        </div>
+    </div>
+</div>   
+<div class="container-fluid" id="id-card">
+    <div class="d-flex mb-3">
+        <div class="px-2">
+            <div class="id-card">
+                <div class="head-text text-center fw-bolder">{{system_name}}</div>
+                <div class="d-flex w-100 justify-content-center my-4">
+                    <img src="{% if employee.picture %}{{employee.picture.url}}{% endif %}" id="card-avatar" class="img-thumbnail" alt="">
+                </div>
+                <div class="lh-1">
+                    <div class="text-center fw-bold">{{ employee.name }}</div>
+                    <div class="text-center fw-light text-sm">{{ employee.department }}</div>
+                    <div class="text-center fw-light text-sm">{{ employee.position }}</div>
+                </div>
+                <div class="lh-1 text-center">
+                    <img src="{% qr_url_from_text employee.employee_code size=5 version=1 image_format='png' %}" id="card-qr" alt="">
+                    <div class="text-center"><b>{{employee.id}}</b></div>
+                </div>
+            </div>
+        </div>
+        <div class="px-2">
+            <div class="id-card">
+                <div class="lh-1">
+                    <dl>
+                        <dt>Employee Code</dt>
+                        <dd>{{employee.employee_code}}</dd>
+                        <dt>Department</dt>
+                        <dd>{{employee.department}}</dd>
+                        <dt>Position</dt>
+                        <dd>{{employee.position}}</dd>
+                        <dt>Gender</dt>
+                        <dd>{{employee.gender}}</dd>
+                        <dt>Date of Birth</dt>
+                        <dd>{{employee.dob|date:'M d, Y'}}</dd>
+                        <dt>Contact #</dt>
+                        <dd>{{employee.contact}}</dd>
+                        <dt>Email</dt>
+                        <dd>{{employee.email}}</dd>
+                        <dt>Address</dt>
+                        <dd><small>{{employee.address}}</small></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<noscript id="qr-style">
+<style>
+    * {
+        font-size: 12px;
+    }
+    * small {
+        font-size: 10px;
+    }
+    .id-card {
+        width: 2.11in;
+        height: 3.38in;
+        border: 2px solid var(--bs-dark);
+        padding: 2rem 1.5rem;
+        border-radius: 5px;
+    }
+    #card-avatar {
+        width: 1in;
+        height: 1in;
+    }
+    #card-qr {
+        width: .7in;
+        height: .7in;
+    }
+</style>
+</noscript>
+<script>
+    $(function() {
+
+    })
+</script>
