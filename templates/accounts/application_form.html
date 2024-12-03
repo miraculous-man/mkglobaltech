@@ -1,0 +1,162 @@
+{% extends 'registration/registration_base.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div id="input-nav"><a href="{% url 'homes' %}" class="primary1" >Home</a> <i>&rsaquo;</i> 
+    <a href="{% url 'applied_student' %}" class="primary1">Students</a> <i>&rsaquo;</i> Application Form</div>
+<br>
+<div class="title-1"><i class="fas fa-user-graduate"></i>Application Form For Addmission </div>
+<!-- <div class="title-line"></div> <h2>Time: {{ form.upload_time }} / date: {{form.updated_date}} </h2><br> -->
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>{{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>{{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<form action="" method="POST" enctype="multipart/form-data" > {% csrf_token %}
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="card " style="background-color: var(--body-bg);">
+            <p class="form-title">Personal Info </p>
+            <div class="p-3">
+
+                <div class="form-group">
+                    <b>{{ form.first_name.label }}</b>{{ form.first_name }}
+                    <span class="danger">{{ form.first_name.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ form.last_name.label }}</b>{{ form.last_name }}
+                    <span class="danger">{{ form.last_name.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ form.email.label }}</b>{{ form.email }}
+                    <span class="danger">{{ form.email.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ form.address.label }}</b>{{ form.address }}
+                    <span class="danger">{{ form.address.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ form.phone.label }}</b>{{ form.phone }}
+                    <span class="danger">{{ form.phone.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ form.date_of_birth.label }}</b>{{ form.date_of_birth }}
+                    <span class="danger">{{ form.date_of_birth.errors }}</span>
+                </div>
+                  <div class="form-group">
+                    <b>{{ form.LG_origin.label }}</b>{{ form.LG_origin }}
+                    <span class="danger">{{ form.LG_origin.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ form.state_origin.label }}</b>{{ form.state_origin }}
+                    <span class="danger">{{ form.state_origin.errors }}</span>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="background-color: var(--body-bg);">
+            <p class="form-title">Others</p>
+            <div class="container">
+                  <div class="form-group">
+                    <b>Class</b>{{ form.department }}
+                    <span class="danger">{{ form.department.errors }}</span>
+                </div>
+                <div class="form-group">
+                    <b>{{ form.level.label }}</b>{{ form.level }}
+                    <span class="danger">{{ form.level.errors }}</span>
+                </div>
+            </div>
+            </div>
+            <div class="card" style="background-color: var(--body-bg);">
+            <p class="form-title"> Parent/Sponsor </p>
+            <div class="container">
+                
+            </div>
+                <div class="form-group">
+                    <b>{{ form.parent_name.label }}</b>{{ form.parent_name }}
+                    <span class="danger">{{ form.parent_name.errors }}</span>
+                </div>
+                  <div class="form-group">
+                    <b>{{ form.parent_adress.label }}</b>{{ form.parent_adress }}
+                    <span class="danger">{{ form.parent_adress.errors }}</span>
+                </div>
+                  <div class="form-group">
+                    <b>{{ form.parent_number.label }}</b>{{ form.parent_number }}
+                    <span class="danger">{{ form.parent_number.errors }}</span>
+                </div>
+                <hr style="color: blue;"> <br>
+
+                  <div class="form-group">
+                    <b>{{ form.emergency_contact.label }}</b>{{ form.emergency_contact }}
+                    <span class="danger">{{ form.emergency_contact.errors }}</span>
+                </div>
+                  <div class="form-group">
+                    <b>{{ form.relationship.label }}</b>{{ form.relationship }}
+                    <span class="danger">{{ form.relationship.errors }}</span>
+                </div>
+                  <div class="form-group">
+                    <b>{{ form.emergency_address.label }}</b>{{ form.emergency_address }}
+                    <span class="danger">{{ form.level.errors }}</span>
+                </div>
+                   <div class="form-group">
+                    <b>{{ form.emergency_number.label }}</b>{{ form.emergency_number }}
+                    <span class="danger">{{ form.emergency_number.errors }}</span>
+                </div>
+                 </div>    
+        </div>
+        </div>
+       
+    </div>
+    <br>
+    <div class="row">
+    <div class="col-md-8 p-0 mx-auto">
+        <div class="card">
+        <p class="form-title">File Upload Form</p><br>
+        <div class="container">
+
+            <div class="form-group" style="float: right;width: 350px;">
+                <b>State of origin image</b>{{ form.student_certificate_waec_image }}
+                <span class="danger">{{ form.student_certificate_waec_image.errors }}</span>
+            </div>
+            <div class="form-group" style="width: 350px;">
+                <b>NIN slip image</b>{{ form.student_certificate_jamb_image }}
+                <span class="danger">{{ form.student_certificate_jamb_image.errors }}</span>
+            </div>
+            <div class="form-group" style=" display: inline-block; width: 350px;">
+                <b>other document image</b>{{ form.student_certificate_other_image }}
+                <span class="danger">{{ form.student_certificate_other_image.errors }}</span>
+            </div>
+             <div class="form-group" style=" width: 350px;" >
+                <b>{{ form.student_files.label }}/pdf </b>{{ form.student_files }}
+                <span class="danger">{{ form.student_files.errors }}</span>
+            </div>
+            <div class="form-group">
+                <b>{{ form.student_passport.label }}</b>{{ form.student_passport }}
+                <span class="danger">{{ form.student_passport.errors }}</span>
+            </div>
+            <p class="text-orange"><b>Valid Files: </b>pdf, docx, doc, xls, xlsx, ppt, pptx, zip, rar, 7zip</p>
+
+        </div>
+        <br>
+        <div class="card">
+        
+    </div>
+    </div>
+
+    <center><input class="btn btn-outline-primary" type="submit" value="Save"></center>
+</form>
+
+{% endblock content %}

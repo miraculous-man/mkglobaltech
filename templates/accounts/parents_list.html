@@ -1,0 +1,119 @@
+{% extends 'base1.html' %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>&rsaquo;</i> Parent</div>
+
+{% if request.user.is_superuser %}
+<a class="add-button" href="{% url 'add_parent' %}"><i class="fas fa-plus"></i>Add Parent</a>
+{% endif %}
+
+<p class="title-1"><i class="fas fa-chalkboard-teacher"></i>Parents List</p>
+<div class="title-line"></div>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>{{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>{{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="content-center">
+    <form class="search-form" action="" method="POST">{% csrf_token %}
+        <input class="au-input" type="text" name="id_no" placeholder="ID No." value="{{ request.GET.id_no }}"/>
+        <input class="au-input" type="text" name="name" placeholder="Name" value="{{ request.GET.name }}"/>
+        <input class="au-input" type="text" name="email" placeholder="Email" value="{{ request.GET.email }}"/>
+        <button class="btn btn-light" type="submit">
+            <i class="fas fa-search"></i> filter
+        </button>
+    </form>
+</div>
+
+<div class="table-responsive table-shadow table-light table-striped m-0 mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID No.</th>
+                <th> username </th>
+                <th> Full Name </th>
+                <th> Email </th>
+                <th> Mob No. </th>
+                <th> Student </th>
+                <th> Relationship </th>
+                {% if request.user.is_superuser %}
+                <th> Action </th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for parents in parent %}
+            <tr>
+                <td> {{ forloop.counter }}.</td>
+                <td>{{ parents.user.username }}</td>
+                <td><a href="{% url 'profile_single' parents.user.id %}">{{ parents.user.get_full_name }}</a></td>
+                <td>{{ parents.email }}</td>
+                <td>{{ parents.phone }}</td>
+                <td>{{ parents.student }}</td>
+                <td>{{ parents.relation_ship}}</td>
+                {% if request.user.is_superuser %}
+                <td> 
+                    <div class="update-delete">
+                        <a href="{% url 'staff_edit' pk=parents.pk %}" class="update"><i class="fas fa-edit"></i></a>
+                        <form action="{% url 'lecturer_delete' pk=parents.pk %}">{% csrf_token %}
+                            <button type="submit" class="btn btn-sm"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </div>
+                </td>
+                {% endif %}
+                
+                {% empty %}
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>
+                  <span class="text-danger">
+                    <i class="far fa-frown"></i>No parents.
+                    {% if request.user.is_superuser %}
+                    <a href="{% url 'add_parentsr' %}">
+                    <i class="primary" style="font-size: 22px;">
+                       Add parents Now.
+                    </i>
+                    {% endif %}
+                    </a>
+                  </span>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    const xhr = new XMLHttpRequest()
+    const method = 'GET'
+    const url = "/accounts/lecturers/"
+    const responseType = "json"
+  
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function() {
+      console.log(xhr.response)
+    }
+    xhr.send()
+</script>
+{% endblock %}

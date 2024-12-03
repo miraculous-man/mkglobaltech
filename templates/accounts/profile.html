@@ -1,0 +1,183 @@
+{% extends 'base1.html' %}
+{% block title %} {{ title }} | mkglobal{% endblock title %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>&rsaquo;</i> {{ user.get_full_name }}</div>
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'error' %}
+<div class="alert alert-danger">
+    <i class="fas fa-exclamation-circle"></i>{{ message }}
+</div>
+{% else %}
+<div class="alert alert-success">
+    <i class="fas fa-check-circle"></i>{{ message }}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<div class="btn-flex">
+    <a class="edit-btn" href="{% url 'edit_profile' %}"><i class="fas fa-user-edit"></i>
+        <span class="mobile-hide">Edit Profile</span></a>
+    <a class="edit-btn" href="{% url 'change_password' %}"><i class="fas fa-lock"></i>
+        <span class="mobile-hide">Change password</span></a>
+    {% if user.is_student %}
+    <a class="edit-btn view_card" href="javascript:void(0)" data-url="{% url 'user-card' user.id %}" >
+        <i class="fas fa-user-edit"></i><span class="mobile-hide">Print Id Card</span>
+    </a>
+    {% endif %}
+    {% if user.is_lecturer %}
+    <a class="edit-btn view_card" href="javascript:void(0)" data-url="{% url 'user-card' user.id %}" >
+        <i class="fas fa-user-edit"></i><span class="mobile-hide">Print Id Card</span>
+    </a>
+    {% endif %}
+    {% if user.is_superuser %}
+    <a class="edit-btn view_card" href="javascript:void(0)" data-url="{% url 'user-card' user.id %}" >
+        <i class="fas fa-user-edit"></i><span class="mobile-hide">Print Id Card</span>
+    </a>
+    {% endif %}
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 mx-auto">
+        <div class="card">
+            <img src="{{ user.picture.url }}" class="dashboard-img">
+            <div class="program-description">
+                <p><strong>Last login: </strong>{{ user.last_login|date }}</p>
+                <p><strong>Full Name: </strong>{{ user.get_full_name|title }}</p>
+                <p><strong>Birth day: </strong>{{ user.dob }}</p>
+
+                <p><strong>Role: </strong>
+                    {{ user.get_user_role }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+             {% if user.is_student %}
+            <p class="form-title"><i class="fas fa-book-open"></i>Enrolled Courses</p>
+            <div class="dashboard-description">
+                {% if courses %}
+                    <div class="flex">
+                        {% for course in courses %}
+                            <div class="flex"><a class="edit-btn" href="{{ course.get_absolute_url }}">{{ course }}</a></div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                        <div class="text-danger"><i class="far fa-frown"></i>No courses!</div>
+                {% endif %}
+            </div>
+            {% endif %} 
+
+            {% if user.is_lecturer %}
+            <p class="form-title"><i class="fas fa-book-open"></i>My Courses</p>
+            <div class="dashboard-description">
+                {% if courses %}
+                <div class="flex">
+                    {% for course in courses %}
+                    <div class="flex"><a class="edit-btn" href="{{ course.get_absolute_url }}">{{ course }}</a></div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-danger"><i class="far fa-frown"></i>No courses!</div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <p class="title-info"><i class="fas fa-user"></i> Personal Info</p>
+            <div class="dashboard-description">
+                <p><strong>First Name:</strong> {{ user.first_name|title }}</p>
+                <p><strong>Last Name:</strong> {{ user.last_name|title }}</p>
+                <p><strong>ID No.:</strong> {{ user.username }}</p>
+            </div>
+            {% if user.is_student %}
+            <p class="title-info"><i class="fas fa-graduation-cap"></i> Applicant Info</p>
+            <div class="dashboard-description">
+                {% for picture in uploaded_image %}                                  
+                {% if picture.id == 2 %}
+                <p><strong>School: </strong>{{picture.news_feed}}</p>
+                {% endif %}
+                 {% endfor %}                
+                 <p><strong>Level: </strong>{{ level.level }}</p>
+            </div>
+            {% endif %}
+
+            <p class="title-info"><i class="fas fa-phone-square-alt"></i> Contact Info</p>
+            <div class="dashboard-description">
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Tel No.:</strong> {{ user.phone }}</p>
+                <p><strong>Address/city:</strong> {{ user.address }}</p>
+            </div>
+
+            <p class="title-info"><i class="fa fa-calendar-day"></i> Important Dates</p>
+            <div class="dashboard-description">
+                <p><strong>Last login:</strong> {{ user.last_login }}</p>
+                {% if current_semester and current_session %}
+                <p><strong>Academic Year:</strong> {{ current_semester }} Semester {{ current_session }}</p>
+                {% endif %}
+                <p><strong>Registered Date:</strong> {{ user.date_joined|date }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mx-auto"></div>
+
+</div>
+<script>
+    $(function() {
+        $('table').find('td, th').addClass('align-middle px-2 py-1')
+        $('.view_card').click(function(){
+            uni_modal("View Profile ID", $(this).attr('data-url'),'modal-lg')
+        })
+        $('.view_detail').click(function(){
+            uni_modal("View Employee Details", $(this).attr('data-url'),'modal-md')
+        })
+        $('#uni_modal').on('shown.bs.modal', function() {
+            if ($('#id-card').length > 0) {
+                var print_btn = $('<button id="print-card" class="btn btn-success btn-sm bg-gradient rounded-0 me-2" type="button"><i class="fa fa-print"></i> Print</button>')
+                $(this).find('.modal-sub-footer').prepend(print_btn)
+                print_btn.click(function() {
+                    var h = $("head").clone()
+                    var style = $($("noscript#qr-style").html()).clone()
+                    var card = $("#id-card").clone()
+                    var el = $('<div>')
+
+                    el.append(h)
+                    el.append(style)
+                    el.append(card)
+                    start_loader()
+                    var nw = window.open("", "_blank", "width=900, height=900")
+                    nw.document.write(el.html())
+                    nw.document.close()
+                    setTimeout(()=>{
+                        nw.print()
+                        setTimeout(()=>{
+                            nw.close()
+                            end_loader()
+                        }, 300)
+                    },300)
+
+                })
+
+                $('#uni_modal').on('hide.bs.modal', function() {
+                    print_btn.remove()
+                })
+            }
+
+        })
+    })
+</script>
+{% endif %}
+
+{% endblock content %}

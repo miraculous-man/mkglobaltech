@@ -1,0 +1,129 @@
+{% extends 'base1.html' %}
+{% block title %} {{ title }} | DjangoSMS{% endblock title %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>&rsaquo;</i> {{ user.get_full_name }}</div>
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'error' %}
+<div class="alert alert-danger">
+    <i class="fas fa-exclamation-circle"></i>{{ message }}
+</div>
+{% else %}
+<div class="alert alert-success">
+    <i class="fas fa-check-circle"></i>{{ message }}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% for student in students %}
+{% if student.id == pk %}
+<div class="btn-flex">
+    <a class="edit-btn" href="{% url 'appliedstudent_edit' student.id %}">
+        <i class="fas fa-user-edit"></i><span class="mobile-hide">Edit Profile</span>
+    </a>
+</div>
+<div class="row justify-content-between">
+
+    <div class="col-md-3 mx-auto">
+        <div class="card">
+            <img src="{{ student.student_passport.url }}" class="dashboard-img">
+            <div class="program-description">
+                <p><strong>First Name: </strong>{{ student.first_name }}</p>
+                <p><strong>Last Name: </strong>{{ student.last_name }}</p>
+                <p><strong>Date Of Birth: </strong>{{ student.date_of_birth }}</p>
+                <p><strong>Role: </strong> Student</p>
+                <p style="text-align: center;"><strong>ID No.:</strong> {{ student.id }}</p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <p class="title-info"><i class="fas fa-user"></i>Personal Info</p>
+            <div class="dashboard-description">
+                <p><strong>First Name: </strong>{{ student.first_name }}</p>
+                <p><strong>Last Name: </strong>{{ student.last_name }}</p>
+                <p><strong>Date Of Birth: </strong>{{ student.date_of_birth }}</p>
+                <p><strong>L.G.A: </strong> {{ student.LG_origin }}</p>
+                <p><strong>State: </strong> {{ student.state_origin }}</p>
+               
+            </div>
+            <p class="title-info"><i class="fas fa-user"></i>Parent/Sponsor Info</p>
+            <div class="dashboard-description">
+                <p><strong>Parent Name:</strong> {{student.parent_name }}</p>
+                <p><strong>Parent Number:</strong> {{ student.parent_number }}</p>
+                <p><strong>Parent Address:</strong> {{ student.parent_adress }}</p>
+                <p><strong>Emergency Contact Name:</strong> {{ student.emergency_contact }}</p>
+                <p><strong>Emergency Contact Number:</strong> {{ student.emergency_number }}</p>
+                <p><strong>Emergency Contact Address:</strong> {{ student.emergency_address }}</p>
+                <p><strong>Relationship With Contact</strong> {{ student.relationship }}</p>
+               
+            </div>
+            <p class="title-info"><i class="fas fa-graduation-cap"></i>Applicant Info</p>
+            <div class="dashboard-description">
+                <p><strong>School: </strong>ESPAM FORMATION UNIVERSITY</p>
+                <p><strong>Department: </strong>{{ student.department }}</p>
+                <p><strong>Level: </strong>{{ student.level }}</p>
+            </div>
+
+            <p class="title-info"><i class="fas fa-phone-square-alt"></i>Contact Info</p>
+            <div class="dashboard-description">
+                <p><strong>Email:</strong> {{ student.email }}</p>
+                <p><strong>Tel No.:</strong> {{ student.phone }}</p>
+                <p><strong>Address/city:</strong> {{ student.address }}</p>
+            </div>
+
+            <p class="title-info"><i class="fa fa-calendar-day"></i>Important Dates</p>
+            <div class="dashboard-description">
+                <p><strong>Last login:</strong> {{ user.last_login }}</p>
+                {% if current_semester and current_session %}
+                <p><strong>Academic Year:</strong> {{ current_semester }} Semester {{ current_session }}</p>
+                {% endif %}
+                <p><strong>Registered Date:</strong> {{ user.date_joined|date }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mx-auto">
+    <p class="title-info"><i class="fa fa-calendar-day"></i>Addmission Letter</p>
+    <div class="dashboard-description">
+
+        <p><strong>Addmission Letter:</strong>  <a href="{% url 'addmission_letter' pk=student.id %}"><img src="{{ student.student_certificate_waec_image.url }}" class="dashboard-img">></a></p>
+
+        {% if current_semester and current_session %}
+        <p><strong>Academic Year:</strong> {{ current_semester }} Semester {{ current_session }}</p>
+        {% endif %}
+        <p><strong>Admission Status:</strong> {{ user.date_joined|date }}</p>
+    </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <p class="title-info"><i class="fa fa-calendar-day"></i>Valid Document</p>
+            <div class="dashboard-description" style="float: right; width: 1200px;">
+            <p  style="float: right; width: 500px;"><strong>WAEC CERTIFICATE:</strong>   <img style="float: right; width: 500px;" src="{{ student.student_certificate_waec_image.url }}" class="dashboard-img" ></p>
+            <p style=" width: 500px;"><strong>JAMB CERTIFICATE:</strong><img style=" width: 500px;" src="{{ student.student_certificate_jamb_image.url }}" class="dashboard-img"></p>
+            </div>
+             <div class="dashboard-description" style="float: right; width: 1200px;">
+            <p  style="float: right; width: 500px;"><strong>OTHER CERTIFICATE:</strong>   <img style="float: right; width: 500px;" src="{{ student.student_certificate_other_image.url }}" class="dashboard-img"></p>
+            <p style=" width: 500px;"><strong>STUDENT DOCUMENT:</strong><a href="{{student.student_files.url}}"><img style=" width: 500px;" src="{{ student.student_certificate_jamb_image.url }}" class="dashboard-img"></a></p>
+             <div>
+                <a class="download-btn" href="{{ student.student_files.url }}" title="Download to your device">
+                    <i class="fas fa-download"></i>Download</a>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endif %}
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,280 @@
+
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+
+<div id="input-nav"><a href="{% url 'home' %}" class="primary1">Home</a> <i>></i> Grade Results</div>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>{{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>{{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="title-1"><i class="fas fa-table"></i>Grade Results</div>
+<div class="title-line"></div>
+
+
+
+{% if no_result == True %}
+
+<div class="alert bg-danger">
+    <h1 class="text-light text-center">No Results Yet</h1>
+    <h5 class="text-light text-center">your child have not sat for any exam!</h5>
+</div>
+
+{% endif %}
+
+
+     <div style="float: left; text-align: left;"><u>
+      {% for picture in uploaded_image %}
+      {% if picture.id == 10 %}
+    <img src="{{picture.picture.url}}" width="150px" alt="Logo mkglobal-tech">
+    {% elif picture.id == 2 %}
+
+      <center><div class="title-1"><b>{{picture.news_feed}}</b></div></center>
+
+    <center> <h1>{{picture.event_feed}}</h1></center>
+
+    {% endif %}   
+    {% endfor %}
+    <div class="table-responsive p-3 mt-3">
+
+      <div class="table-title"><u>First Term:</u> </div>
+    <div class="table-responsive p-0 px-2 mt-3">
+    <div style="float: left; text-align: left;"><P style="display: inline-block;"><b>Name of pupil:</b></P><p style="display: inline-block; margin-left: 10px;"><U>{{student.student.get_full_name}}</U></P> 
+    </u></P><P  style="display: inline-block; "><b> Age:</b> <p style="display: inline-block; margin-left: 10px;"><U>_______</U></P><p style="display: inline-block; margin-left: 20px;"><b>Class:</b><U>{{student.level}}</U></P>  </div>
+
+     
+    <div style=  "float: right; text-align:right;"><P style="display: inline-block;"><b>SESSION:</b><u>{{session}},</u></p><p style="display: inline-block; margin-left: 20px;"><b>TERM:</b><U>{{course.course.semester}}</U></P>
+        <br> <P style="display: inline-block;"><b>Attendance:</b></P> 
+        <p style="display: inline-block; margin-left: 10px;"><U>_______</U> <b>Next Term Begins:</b><U>{{ next_sesstion }}</U></P></div>
+        <div class="table-responsive p-0 px-2 mt-3">
+
+  <table class="table table-light" style="border:solid; border-color: black;">
+    <thead  style="border:solid; border-color: black;">
+      <tr >
+        <th style="border:solid; border-color: black;" >S/N</th>
+        <th style="border:solid; border-color: black;">SUBJECTS</th>
+        <th style="border:solid; border-color: black;">Assign-ment</th>
+        <th style="border:solid; border-color: black;">Atten-dance</th>
+        <th style="border:solid; border-color: black;">Mid CA</th>
+        <th style="border:solid; border-color: black;">Quiz</th>
+        <th style="border:solid; border-color: black;">Final exam</th>
+        <th style="border:solid; border-color: black;">Grade</th>
+        <th style="border:solid; border-color: black;">Total</th>
+        <th style="border:solid; border-color: black;">Teacher's Remark</th>
+
+      </tr>
+    </thead>
+    
+    {% for course in courses %}
+    {% if course.course.semester == "First" %}
+    <tbody>
+      {% if student.switch == 1 %}
+      <tr>
+        <th></th>
+        <td></td>
+        <td></td>
+        <td></td>
+
+         <td>
+
+        <div class="alert bg-danger">
+            <h1 class="text-light text-center">No Fees No Results</h1>
+            <h5 class="text-light text-center">Please pay you fees to see Results...</h5>
+        </div>
+         </td>
+      </tr>
+      {% else %}
+
+        <th style="border:solid; border-color: black;" scope="row">{{ forloop.counter }}</th>
+        <td style="border:solid; border-color: black;"><a href="{{ course.course.get_absolute_url }}">{{ course.course.title }}</a></td>
+        <td style="border:solid; border-color: black;">{{ course.assignment }}</td>
+        <td style="border:solid; border-color: black;">{{ course.attendance }}</td>
+        <td style="border:solid; border-color: black;">{{ course.mid_exam }}</td>
+        <td style="border:solid; border-color: black;">{{ course.quiz }}</td>
+        <td style="border:solid; border-color: black;">{{ course.final_exam }}</td>
+        <td style="border:solid; border-color: black;">{{ course.grade }}</td>
+
+        {% if course.total >= 45 %}
+        <td style="border:solid; border-color: black;" class="success"> {{ course.total }}</td>
+        {% else %}
+        <td style="border:solid; border-color: black;" class="danger" style="color: red;"> {{ course.total }}</td>
+        {% endif %}
+        <td style="border:solid; border-color: black;">{{ course.comment }}</td>
+
+      </tr>
+    </tbody>
+   <p style="display: inline-block; margin-right: 400px;"></p><b>Grade: </b><U>{{grade}}</U></P>
+
+  <div style=  "float: right; text-align:right;"><P>Grand Total:<u>{{grand_total}} <spam >|</spam> </u>Overall Average:<U>{{average}}</U></P>
+    {% endif %}
+    {% endif %}
+    {% endfor %}  
+  </table>
+  </div>
+  <br><br><br><br>
+
+
+  <div style="float: left; text-align: left;"><u>
+    {% for picture in uploaded_image %}
+    {% if picture.id == 10 %}
+  <img src="{{picture.picture.url}}" width="150px" alt="Logo mkglobal-tech">
+  {% elif picture.id == 2 %}
+
+    <center><div class="title-1"><b>{{picture.news_feed}}</b></div></center>
+
+  <center> {{picture.event_feed}}</center>
+
+  {% endif %}   
+  {% endfor %}
+  <div class="table-responsive p-3 mt-3">
+  <div class="table-title"><u>Second Term:</u></div>
+  <div class="table-responsive p-0 px-2 mt-3">
+    <div style="float: left; text-align: left;"><P>Name of pupils <u>{{student.student.get_full_name}}
+  </u>
+    </P><P>Age:<u>_____</u>Class:<u>{{ student.level }}</u>  </div>
+  
+      <div style=  "float: right; text-align:right;"><P>SESSION:<u>{{session}},</u>TERM:<U>{{course.course.semester}}</U></P>
+          <P>Attendance:<u>_____,</u>Out of:<u>_____,</u>Next Term Begins:<U>{{course.session}}</U></P></div>
+  
+    <table class="table table-light" style="border:solid; border-color: black;">
+      <thead  style="border:solid; border-color: black;">
+        <tr >
+          <th style="border:solid; border-color: black;" >S/N</th>
+          <th style="border:solid; border-color: black;">SUBJECTS</th>
+          <th style="border:solid; border-color: black;">Assign-ment</th>
+          <th style="border:solid; border-color: black;">Atten-dance</th>
+          <th style="border:solid; border-color: black;">Mid CA</th>
+          <th style="border:solid; border-color: black;">Quiz</th>
+          <th style="border:solid; border-color: black;">Final exam</th>
+          <th style="border:solid; border-color: black;">Grade</th>
+          <th style="border:solid; border-color: black;">Total</th>
+          <th style="border:solid; border-color: black;">Teacher's Remark</th>
+  
+        </tr>
+      </thead>
+
+      {% for course in courses %}
+      {% if course.course.semester == "Second" %} 
+      <tbody>
+        <tr  class="{% if forloop.counter|divisibleby:2 %}bg-gray{% endif %}">
+          <th scope="row">{{ forloop.counter }}</th>
+          <td style="border:solid; border-color: black;"><a href="{{ course.course.get_absolute_url }}">{{ course.course.title }}</a></td>
+          <td style="border:solid; border-color: black;">{{ course.assignment }}</td>
+          <td style="border:solid; border-color: black;">{{ course.attendance }}</td>
+          <td style="border:solid; border-color: black;">{{ course.mid_exam }}</td>
+          <td style="border:solid; border-color: black;">{{ course.quiz }}</td>
+          <td style="border:solid; border-color: black;">{{ course.final_exam }}</td>
+          <td style="border:solid; border-color: black;">{{ course.grade }}</td>
+  
+          {% if course.total >= 45 %}
+          <td class="success"> {{ course.total }}</td>
+          {% else %}
+          <td class="danger" style="color: red;"> {{ course.total }}</td>
+          {% endif %}
+          <td style="border:solid; border-color: black;">{{ course.comment }}</td>
+  
+        </tr>
+      </tbody>
+ 
+      {% endif %}
+      {% endfor %}
+    </table>
+      
+    {% for course in courses %}
+    {% if course.course.semester == "Second" %} 
+      <div style=  "float: right; text-align:right;"><P>Grand Total:<u>{{grand_total}} <spam >|</spam> </u>Overall Average:<U>{{average}}</U></P>
+
+      {% endif %}
+      {% endfor %}
+    </div>
+    <br><br><br><br>
+
+    <div style="float: left; text-align: left;"><u>
+      {% for picture in uploaded_image %}
+      {% if picture.id == 10 %}
+    <img src="{{picture.picture.url}}" width="150px" alt="Logo mkglobal-tech">
+    {% elif picture.id == 2 %}
+
+      <center><div class="title-1"><b>{{picture.news_feed}}</b></div></center>
+
+    <center> {{picture.event_feed}}</center>
+
+    {% endif %}   
+    {% endfor %}
+    <div class="table-responsive p-3 mt-3">
+    <div class="table-title"><u>Third Term:</u></div>
+    <div class="table-responsive p-0 px-2 mt-3">
+    <div style="float: left; text-align: left;"><P style="display: inline-block;"><b>Name of pupil:</b></P><p style="display: inline-block; margin-left: 10px;"><U>{{student.student.get_full_name}}</U></P>
+    </u></P><P  style="display: inline-block; "><b> Age:</b> <p style="display: inline-block; margin-left: 10px;"><U>_______</U></P><p style="display: inline-block; margin-left: 20px;"><b>Class:</b><U>{{student.level}}</U></P>  </div>
+
+    
+    <div style=  "float: right; text-align:right;"><P style="display: inline-block;"><b>SESSION:</b><u>{{session}},</u></p><p style="display: inline-block; margin-left: 20px;"><b>TERM:</b><U>{{course.course.semester}}</U></P>
+        <br> <P style="display: inline-block;"><b>Attendance:</b></P> 
+        <p style="display: inline-block; margin-left: 10px;"><U>_______</U> <b>Next Term Begins:</b><U>{{ next_sesstion }}</U></P></div>
+        <div class="table-responsive p-0 px-2 mt-3">
+
+  <table class="table table-light" style="border:solid; border-color: black;">
+    <thead  style="border:solid; border-color: black;">
+      <tr >
+        <th style="border:solid; border-color: black;" >S/N</th>
+        <th style="border:solid; border-color: black;">SUBJECTS</th>
+        <th style="border:solid; border-color: black;">Assign-ment</th>
+        <th style="border:solid; border-color: black;">Atten-dance</th>
+        <th style="border:solid; border-color: black;">Mid CA</th>
+        <th style="border:solid; border-color: black;">Quiz</th>
+        <th style="border:solid; border-color: black;">Final exam</th>
+        <th style="border:solid; border-color: black;">Grade</th>
+        <th style="border:solid; border-color: black;">Total</th>
+        <th style="border:solid; border-color: black;">Teacher's Remark</th>
+
+      </tr>
+    </thead>
+    
+    {% for course in courses %}
+    {% if course.course.semester == "Third" %}
+    <tbody>
+      <tr  class="{% if forloop.counter|divisibleby:2 %}bg-gray{% endif %}">
+        <th style="border:solid; border-color: black;" scope="row">{{ forloop.counter }}</th>
+        <td style="border:solid; border-color: black;"><a href="{{ course.course.get_absolute_url }}">{{ course.course.title }}</a></td>
+        <td style="border:solid; border-color: black;">{{ course.assignment }}</td>
+        <td style="border:solid; border-color: black;">{{ course.attendance }}</td>
+        <td style="border:solid; border-color: black;">{{ course.mid_exam }}</td>
+        <td style="border:solid; border-color: black;">{{ course.quiz }}</td>
+        <td style="border:solid; border-color: black;">{{ course.final_exam }}</td>
+        <td style="border:solid; border-color: black;">{{ course.grade }}</td>
+
+        {% if course.total >= 45 %}
+        <td style="border:solid; border-color: black;" class="success"> {{ course.total }}</td>
+        {% else %}
+        <td style="border:solid; border-color: black;" class="danger" style="color: red;"> {{ course.total }}</td>
+        {% endif %}
+        <td style="border:solid; border-color: black;">{{ course.comment }}</td>
+
+      </tr>
+    </tbody>
+
+    {% endif %}
+    {% endfor %}
+  </table>
+  
+  {% for course in courses %}
+  {% if course.course.semester == "Third" %} 
+  <div style=  "float: right; text-align:right;"><P>Grand Total:<u>{{grand_total}} <spam >|</spam> </u>Overall Average:<U>{{average}}</U></P>
+  <p style="display: inline-block; margin-left: 400px;"><b>Grade: </b><U>{{grade}}</U></P>
+  {% endif %}
+  {% endfor %}
+  </div>
+  {% endblock %}
