@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}school project{% endblock title %}</title>
+
+    <!-- <link href="{% static 'css/font-face.css' %}" rel="stylesheet" media="all"> -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"> -->
+    <!-- <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}"> -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/black.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <!-- django links -->
+    <link rel="stylesheet" href="{% static './Select user to change _ Django site admin_files/base.css' %}">
+
+  <link rel="stylesheet" href="{% static './Select user to change _ Django site admin_files/dark_mode.css' %}">
+  <script src="{% static './Select user to change _ Django site admin_files/theme.js.download' %}" defer=""></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- <link rel="stylesheet" href="{% static 'assets/default/css/style.css' %}"> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="{% static 'assets/default/js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'assets/bootstrap/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/default/js/script.js' %}"></script>
+<!-- 
+  <link rel="stylesheet" href="{% static './Select user to change _ Django site admin_files/nav_sidebar.css' %}">
+  <script src="{% static './Select user to change _ Django site admin_files/nav_sidebar.js.download' %}" defer=""></script> -->
+
+
+<!--   
+  <link rel="stylesheet" href="{% static './Select user to change _ Django site admin_files/changelists.css' %}">
+  
+  
+    <script src="{% static './Select user to change _ Django site admin_files/saved_resource' %}"></script> -->
+  
+  
+  
+
+
+
+<!-- 
+    <script src="{% static './Select user to change _ Django site admin_files/jquery.js.download' %}"></script>
+    <script src="{% static './Select user to change _ Django site admin_files/jquery.init.js.download' %}"></script>
+    <script src="{% static './Select user to change _ Django site admin_files/core.js.download' %}"></script>
+    <script src="{% static './Select user to change _ Django site admin_files/RelatedObjectLookups.js.download' %}"></script>
+    <script src="{% static './Select user to change _ Django site admin_files/actions.js.download' %}"></script>
+    <script src="{% static './Select user to change _ Django site admin_files/urlify.js.download' %}"></script>
+    <script src="{% static './Select user to change _ Django site admin_files/prepopulate.js.download' %}"></script>
+    <script src="{% static './Select user to change _ Django site admin_files/xregexp.js.download' %}"></script>
+    <script src="{% static './Select user to change _ Django site admin_files/filters.js.download' %}" defer=""></script> -->
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="{% static './Select user to change _ Django site admin_files/responsive.css' %}">
+    
+
+    <!-- end django links -->
+    <!-- <script src="https://js.stripe.com/v3/"></script> -->
+    {% block header %}{% endblock %}
+</head>
+
+<body >
+    {% include 'aside.html' %}
+    <div id="main" >
+        {% include 'navbar1.html' %}
+
+        <div class="container-fluid" id="main-content">
+            {% block content %}{% endblock content %}
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#primary-search').focus(function () {
+                $('#top-navbar').attr('class', 'dim');
+                $('#side-nav').css('pointer-events', 'none');
+                $('#main-content').css('pointer-events', 'none');
+            });
+            $('#primary-search').focusout(function () {
+                $('#top-navbar').removeAttr('class');
+                $('#side-nav').css('pointer-events', 'auto');
+                $('#main-content').css('pointer-events', 'auto');
+            });
+        })
+    </script>
+
+    {% block js %}
+
+    {% endblock js %}
+    <div class="modal fade" id="uni_modal" role='dialog'>
+        <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-sm btn-flat btn-primary rounded-0" id='submit' onclick="$('#uni_modal form').submit()">Save</button>
+                    <button type="button" class="btn btn-sm btn-flat btn-light border rounded-0" data-bs-dismiss="modal">Cancel</button>
+                </div>
+                <div class="modal-sub-footer">
+                    <button type="button" class="btn btn-sm btn-flat btn-light border rounded-0" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirm_modal" role='dialog'>
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="delete_content"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-flat btn-primary rounded-0" id='confirm' onclick="">Continue</button>
+                    <button type="button" class="btn btn-sm btn-flat btn-light border rounded-0" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const loader = $('<div>')
+        loader.attr('id', 'pre-loader')
+        loader.html('<div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>')
+
+        window.start_loader = function() {
+            $('body').removeClass('loading')
+            if ($('#pre-loader').length > 0)
+                $('#pre-loader').remove();
+            $('body').append(loader)
+            $('body').addClass('loading')
+        }
+        window.end_loader = function() {
+            if ($('#pre-loader').length > 0)
+                $('#pre-loader').remove();
+            $('body').removeClass('loading')
+        }
+        window.uni_modal = function($title = '', $url = '', $size = "") {
+            start_loader()
+            $.ajax({
+                url: $url,
+                error: err => {
+                    console.log()
+                    alert("An error occured")
+                },
+                success: function(resp) {
+                    if (resp) {
+                        $('#uni_modal .modal-title').html($title)
+                        $('#uni_modal .modal-body').html(resp)
+                        if ($size != '') {
+                            $('#uni_modal .modal-dialog').addClass($size + '  modal-dialog-centered')
+                        } else {
+                            $('#uni_modal .modal-dialog').removeAttr("class").addClass("modal-dialog modal-md modal-dialog-centered")
+                        }
+                        $('#uni_modal').modal({
+                            backdrop: 'static',
+                            keyboard: false,
+                            focus: true
+                        })
+                        $('#uni_modal').modal('show')
+                        end_loader()
+                    }
+                }
+            })
+        }
+        window._conf = function($msg = '', $func = '', $params = []) {
+            $('#confirm_modal #confirm').attr('onclick', $func + "(" + $params.join(',') + ")")
+            $('#confirm_modal .modal-body').html($msg)
+            $('#confirm_modal').modal('show')
+        }
+        
+        $(function() {
+            $('#uni_modal').on('shown.bs.modal', function() {
+                if ($('#e-details').length > 0) {
+                    var delete_btn = $('<button id="delete-btn" class="btn btn-danger btn-sm bg-gradient rounded-0 me-2"><i class="fa fa-trash"></i> Delete</button>')
+                    var edit_btn = $('<a id="edit-btn" href="' + emp_edit_url + '" class="btn btn-primary btn-sm bg-gradient rounded-0 me-2"><i class="fa fa-edit"></i> Edit</a>')
+                    $(this).find('.modal-sub-footer').prepend(delete_btn)
+                    $(this).find('.modal-sub-footer').prepend(edit_btn)
+                    delete_btn.click(function() {
+                        _conf("Are you sure to delete this employee?", "delete_employee")
+                    })
+    
+                    $('#uni_modal').on('hide.bs.modal', function() {
+                        delete_btn.remove()
+                        edit_btn.remove()
+                    })
+    
+                }
+            })
+        })
+    
+        function delete_employee() {
+            start_loader()
+            $.ajax({
+                url: emp_delete_url,
+                error: err => {
+                    console.error(err)
+                    alert("An error occurred.")
+                    end_loader()
+                },
+                success: function(resp) {
+                    if (resp.status == 'success') {
+                        location.reload()
+                    } else if (!!resp.msg) {
+                        alert(resp.msg)
+                    }
+                    end_loader()
+                }
+            })
+        }
+    </script>
+    
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+
+</html>

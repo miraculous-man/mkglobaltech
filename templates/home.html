@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+{% load static %}
+
+<!-- saved from url=(0023)https://www.sfp.edu.ng/ -->
+<html dir="ltr" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {% for picture in uploaded_image %}                                  
+        {% if picture.id == 2 %}
+        <title>.::{{picture.news_feed}}::.</title>
+        {% endif %}
+         {% endfor %}
+        <meta name="description" content="Sure Foundation, Polytechnic, Trinity Polytechnic - Educational, College and Courses, Polytechnic in Nigeria, Polytechnics in Akwa Ibom State, Polytechnics in Uyo, Akwa Ibom State, akwa ibom State Polytechnic, akwa ibom State of Nigeria">
+<meta name="author" content="GreatRivers Technologies">
+<meta name="keywords" content="Sure Foundation Student Portal, Trinity Polytechnic Student Portal, Student Portal, sure foundation Student, sure foundation Student Admission, Portal, akwa ibom state Polytechnic Student uyo, www.sfp.edu.g, https://www.sfp.edu.ng, ukanafun, Uyo, Akwa Ibom State">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                                           </a>
+        {% for picture in uploaded_image %}                                  
+        {% if picture.id == 24 %}
+        <link rel="shortcut icon" href=" {{picture.picture.url}}  " type="image/x-icon">
+         {% endif %}
+         {% endfor %}
+        <link href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/bootstrap.min.css'%} " rel="stylesheet">
+        <link href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/owl.carousel.css'%}" rel="stylesheet">
+        <link href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/font-awesome.min.css'%}" rel="stylesheet">
+        <link href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/style.css'%}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/ss-print.css'%}">
+        <link rel="stylesheet" href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/bootstrap-datepicker3.css'%}">
+        <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/moment.min.js.download'%}"></script>
+        <!--file dropify-->
+        <link rel="stylesheet" href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/dropify.min.css'%}">
+        <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/jquery.min.js.download'%}"></script>
+        <!--file dropify-->
+        <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/dropify.min.js.download'%}"></script>
+        <!-- Style of the plugin -->
+  	    <link rel="stylesheet" href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/whatsapp-chat-support.css'%}">
+  	    <link rel="stylesheet" href="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/font-awesome(1).min.css'%}">
+        <script src="{% static './id_card/idCard.css' %}"></script>
+
+    </head>
+    <body>
+        <div id="alert" class="affix-top">
+            <div class="topsection">
+                <section class="newsarea">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="newscontent">
+                                    <div class="newstab">Latest News</div>
+                                    <div class="newscontent">
+                                        <marquee class="" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+                                            <ul id="" class="">
+                                                <li>   {% for picture, idss in uploaded_image_zip %}
+                                                    {% if picture.id == idss %}
+                                                    <a href="https://www.sfp.edu.ng/#">
+                                                        <div class="datenews">
+                                                            {{picture.contact_us}}:
+                                                            <span> </span>
+                                                        </div>
+                                                        {{picture.event_feed}}                                                    </a>
+                                                </li>{% endif %}
+                                            </ul>{% endfor %}
+                                            
+                                        </marquee>
+                                    </div>
+                                    <!--./newscontent-->
+                                </div>
+                                <!--./sidebar-->
+                            </div>
+                            <!--./col-md-12-->
+                        </div>
+                    </div>
+                </section>
+                <div class="toparea">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <ul class="toplist">
+                                    {% for picture in uploaded_image %}
+                                    
+                                    {% if picture.id == 10 %}
+                                    <li>
+                                        <a href="mailto:{{picture.contact_us}}"><i class="fa fa-envelope-o"></i>{{picture.contact_us}}</a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <!--./col-md-5-->
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <ul class="topicon">
+                                    <li>Follow Us</li>
+
+                                    <li>{% for picture in uploaded_image %}
+                                        {% if picture.id == 24 %}
+                                         <a href="https://facebook.com/{{picture.event_feed}}" target="_blank"><img style="height: 30px; width: 30px; margin-right: 30px;" src="./static/img/facebook.png" alt=""></a>
+                                     </li>
+ 
+                                     <li> 
+                                         <a href="https://twitter.com/{{picture.news_feed}}" target="_blank"><img style="height: 30px; width: 30px; margin-right: 30px;" src="./static/img/twiter.png" alt=""></a>
+                                     </li>
+ 
+                                     <li> 
+                                         <a href="https://www.linkedin.com/{{picture.contact_us}}" target="_blank"><img style="height: 30px; width: 30px; margin-right: 30px;" src="./static/img/linkin.png" alt=""></a>
+                                     </li>
+ 
+                                     <li> {% elif picture.id == 25 %}
+                                         <a href="https://www.instagram.com/{{picture.event_feed}}" target="_blank"><img style="height: 30px; width: 30px; margin-right: 30px;" src="./static/img/instagram.png" alt=""></a>
+                                     </li>
+                                     {% endif %}
+                                     {% endfor %} 
+                                </ul>
+                            </div>
+                            <!--./col-md-6-->
+                        </div>
+                    </div>
+                </div>
+                <!--./toparea-->
+            </div>
+            <!--./topsection-->
+
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-5">
+                            {% for picture in uploaded_image %}
+
+                            {% if picture.id == 10 %}
+                            <a class="logo" href=""><img src="{{picture.picture.url}}" alt=""></a>
+                        </div>
+                        
+                        <!--./col-md-4-->
+                        <div class="col-md-9 col-sm-7">
+                            <ul class="header-extras">
+                                <li>
+                                    <i class="i-plain"><img height="25px" width="25px" src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/phone.svg' %} "></i>
+                                    <div class="he-text">Call Us<span>{{picture.event_feed}}</span></div>
+                                </li>
+                                <li>
+                                    <a class="complainbtn" href="{% url 'login2'%}" target="_blank">school portal</a>
+                                </li>
+                                {% endif %}
+                                 {% endfor %}
+                                <!-- <li><i class="fa fa-pencil-square-o i-plain"></i>
+                           <div class="he-text">Feedback<span><a href="https://demo.smart-school.in/page/complain">Complain</a></span>
+                           </div>
+                       </li> -->
+                            </ul>
+                        </div>
+                        <!--./col-md-8-->
+                    </div>
+                    <!--./row-->
+                </div>
+                <!--./container-->
+
+                <div class="navborder">
+                    <div class="container">
+                        <div class="row">
+                            <nav class="navbar">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+
+                                <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active">
+                                            <a href="http">Home</a>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admission <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{% url 'register'%}">Eleaning Registration</a></li>
+                                                <li><a href="{% url 'applied_student'%}">Online Admission Form</a></li>
+                                                
+                                            </ul>
+                                        </li>
+
+                                        <li class=" ">
+                                            <a href="{% url 'contact_us'%}">Contact Us</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="" data-toggle="modal" data-target="#myModal2">eLearning Portal</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{% url 'view-scanner'%}" data-toggle="modal" data-target="#myModal1">Verify ID</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.navbar-collapse -->
+                            </nav>
+                            <!-- /.navbar -->
+                        </div>
+                    </div>
+                </div>
+            </header>        </div>
+        <div id="bootstrap-touch-slider" class="carousel bs-slider slide control-round" data-ride="carousel" data-interval="5000">
+            <div class="carousel-inner">
+                    {% for picture in uploaded_image %}
+                    {% if picture.id == 2 %}
+                    <div class="item active">
+
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+                {% elif picture.id == 1 %}
+                <div class="item ">
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+                {% elif picture.id == 3 %}
+                <div class="item ">
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+                {% elif picture.id == 4 %}
+                <div class="item ">
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+                {% elif picture.id == 5 %}
+                <div class="item ">
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+                {% elif picture.id == 6 %}
+                <div class="item ">
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+                {% elif picture.id == 7 %}
+                <div class="item ">
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+                {% elif picture.id == 8 %}
+                <div class="item ">
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+                {% elif picture.id == 9 %}
+                <div class="item ">
+                    <img style="height: 500px;" src="{{picture.picture.url}}" alt="">
+                </div>
+    
+            <!--./carousel-inner-->
+            <a class="left carousel-control" href="https://www.sfp.edu.ng/#bootstrap-touch-slider" data-slide="prev">
+                <span class=><</span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <!-- Right Control-->
+            <a class="right carousel-control" href="https://www.sfp.edu.ng/#bootstrap-touch-slider" data-slide="next">
+                <span class="">></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="container spacet60">
+            <div class="row">
+                <div class="col-md-12 spacet60 pt-0-mobile">
+                    <section class="services">
+                        <div class="service-inner">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 service-box">
+                                        <div class="service-box-content">
+                                            {% for picture in uploaded_image %}
+                                            {% if picture.id == 12 %}
+                                            <h3><a href="{% url 'register'%}" target="_blank">{{picture.event_feed}}</a></h3>
+
+                                            <p>{{picture.news_feed}}</p>
+
+                                            <div class="service-box-icon"><img src="{{picture.picture.url}}"></div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    <!--./col-md-6-->
+
+                                    <div class="col-md-6 col-sm-6 service-box">
+                                        <div class="service-box-content">
+                                            {% for picture in uploaded_image %}
+                                            {% if picture.id == 14 %}
+                                            <h3><a href="{% url 'applied_student'%}" target="_blank">{{picture.event_feed}}</a></h3>
+
+                                            <p>{{picture.news_feed}}.</p>
+
+                                            <div class="service-box-icon"><img src="{{picture.picture.url}}"></div>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                  
+                                    <!--./col-md-6-->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+<section class="bg-gray fullwidth spaceb40 spacet40">
+<div class="container">
+<div class="row">
+
+<div class="col-md-6 col-sm-6">           
+     {% elif picture.id == 11 %}
+
+<div class="about_img"><img class="img-responsive img-rounded" src="{{picture.picture.url}}"></div>
+</div>
+
+<!--./col-md-6-->
+
+<div class="col-md-6 col-sm-6">
+<div class="about-right">
+
+</div>
+
+<div class="panel-group accrodion2" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+{% elif picture.id == 16 %}
+
+<h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="https://www.sfp.edu.ng/#collapseOne">    {{picture.news_feed}}
+</a></h4>
+</div>
+
+<div class="panel-collapse collapse" id="collapseOne">
+<div class="panel-body">
+
+  <p>    <div  ><img class="img-responsive" style="height: auto;" src="{{picture.picture.url}}"></div>
+
+    {{picture.event_feed}}
+    <!-- Sure Foundation Polytechnic (SFP), Ikot Akai is a unique  institution in Akwa Ibom State. It is the FIRST private polytechnic in Akwa  Ibom State that is starting with NBTE/FME Approval and License to operate. We  are the FIRST approved polytechnic in the former Abak Division, the most  equipped in terms of Laboratories and workshops.<br><br>
+    SFP is founded on its permanent site and built according to  its master plan. It is borne out of 34 years of experience in technical and  senior managerial positions in Exxon Mobile Corporation both in Nigeria and  overseas. SFP is borne out of research and comparison with leading polytechnics  in the United States, Canada and Great Britain. The polytechnic has never been  affiliated with any polytechnic in Nigeria but will open its doors for serious  academic work and industrial exposure come September 2016 on standalone status  in the following programs<br><br>
+  <strong>NATIONAL DIPLOMA </strong><br>
+  <strong>ELECTRICAL/ELECTRONICS ENGINEERING  TECHNOLOGY</strong> with concentration in Electronic Engineering Technology;  Instrumentation and Industrial measurements and controls; Telecommunication  Engineering; Electrical Power and Machines; Industrial and Domestic  Installation; Industrial Air condition and Refrigeration.<br>
+  <strong>COMPUTER ENGINEERING TECHNOLOGY</strong> with  concentration in Computer Communications and Networking; Architecture and  Designs; Software Development Engineering; Embedded systems such as internet  routes, cell phones designs, automobiles traction systems, GPSS, HDTVs, DVRs  and Microwave Ovens<br>
+  <strong>COMPUTER SCIENCE</strong> with concentration in  Artificial Intelligence; Computer Information System; Computer Graphics;  Programming; Networks; Computer Servicing Technology; Data processing, Database  systems; Managing Information Systems<br>
+  <strong>STATISTICS, ACCOUNTANCY and PUBLIC  ADMINISTRATION</strong></p>
+  <p><strong>CERTIFICATE COURSE</strong><br>
+    <strong>Technicians Certificate Course (ADVANCE)</strong> for holders of Technician certificate, City &amp; Guilds who would want to  progress to City &amp; Guilds full Technology Diploma<br>
+    <strong>Advanced Electrical Installation</strong> Certificate Course for technical school graduates who want to specialize in  installation work.<br>
+    <strong>Telecommunication Technicians Course</strong> (ADVANCE)<br>
+    <strong>Computer Servicing Technology</strong><br>
+    <strong>Applied Information Technology</strong><br>
+    <strong>Computer Operations and Data Processing</strong><br>
+    <strong>Senior School/JAMB Preparatory</strong><br>
+    We also run a weekend program in all the six approved  National Diploma Courses</p>
+Once  again, you are all welcome to Sure Foundation Polytechnic, Ikot Akai, Ukanafun  Local Government Area, Akwa Ibom State.--></div> 
+{% endif %}
+{% endfor %}
+</div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+{% for picture in uploaded_image %}
+{% if picture.id == 17 %}
+
+<h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="https://www.sfp.edu.ng/#collapseTwo"> {{picture.news_feed}}
+</a></h4>
+</div>
+
+<div class="panel-collapse collapse" id="collapseTwo">
+<div class="panel-body">
+    <p>    <div  ><img class="img-responsive" style="height: auto;" src="{{picture.picture.url}}"></div>
+        {{picture.event_feed}}</div>
+{% endif %}
+{% endfor %}
+</div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+    {% for picture in uploaded_image %}
+    {% if picture.id == 18 %}
+<h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="https://www.sfp.edu.ng/#collapseThree">{{picture.news_feed}} </a></h4>
+</div>
+
+<div class="panel-collapse collapse" id="collapseThree">
+    <div class="panel-body">
+        <p>    <div  ><img class="img-responsive" style="height: auto;" src="{{picture.picture.url}}"></div>
+        {{picture.event_feed}}   
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+    {% for picture in uploaded_image %}
+    {% if picture.id == 19 %}
+<h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="https://www.sfp.edu.ng/#collapseFour">{{picture.news_feed}} </a></h4>
+</div>
+
+<div class="panel-collapse collapse" id="collapseFour">
+    <div class="panel-body">
+        <p>    <div  ><img class="img-responsive" style="height: auto;" src="{{picture.picture.url}}"></div>
+        {{picture.event_feed}}
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+</div>
+    
+<div class="panel panel-default">
+<div class="panel-heading">
+    {% for picture in uploaded_image %}
+    {% if picture.id == 20 %}
+<h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="https://www.sfp.edu.ng/#collapseFive">{{picture.news_feed}} </a></h4>
+</div>
+
+<div class="panel-collapse collapse" id="collapseFive">
+    <div class="panel-body">
+        <p>    <div  ><img class="img-responsive" style="height: auto;" src="{{picture.picture.url}}"></div>
+        {{picture.event_feed}}   
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+</div>
+    
+<div class="panel panel-default">
+<div class="panel-heading">
+    {% for picture in uploaded_image %}
+    {% if picture.id == 21 %}
+<h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="https://www.sfp.edu.ng/#collapseSix">{{picture.news_feed}} </a></h4>
+</div>
+
+<div class="panel-collapse collapse" id="collapseSix">
+    <div class="panel-body">
+        <p>    <div  ><img class="img-responsive" style="height: auto;" src="{{picture.picture.url}}"></div>
+        {{picture.event_feed}}    
+    {% endif %}
+    {% endfor %}
+</div>
+</div>
+</div>
+    
+<div class="panel panel-default">
+<div class="panel-heading">
+    {% for picture in uploaded_image %}
+    {% if picture.id == 22 %}
+<h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="https://www.sfp.edu.ng/#collapseSeven">{{picture.news_feed}}</a></h4>
+</div>
+
+<div class="panel-collapse collapse" id="collapseSeven">
+    <div class="panel-body">
+        <p>    <div  ><img class="img-responsive" style="height: auto;" src="{{picture.picture.url}}"></div>
+        {{picture.event_feed}}
+    {% endif %}
+    {% endfor %}    
+</div>
+</div>
+</div>
+    
+</div>
+</div>
+<!--./col-md-6--></div>
+<!--./row--></div>
+<!--./container--></section>                    
+                </div>
+            </div>
+            <!--./row-->
+        </div>
+        <!--./container-->
+
+<div class="whatsapp_chat_support wcs_fixed_right wcs-effect-1" id="example_3">
+		<div class="wcs_button_label">
+ 			Questions? Let's Chat
+ 		</div>	
+		<div class="wcs_button wcs_button_circle">
+			<span><img style="height: 50px; width: 50px; margin-right: 30px;" src="./static/img/whatsapp.png" alt=""></span>
+		</div>	
+
+		<div class="wcs_popup">
+			<div class="wcs_popup_close">
+				<span class="fa fa-close"></span>
+			</div>
+			<div class="wcs_popup_header">
+				<strong>Need Help? Chat with us</strong>
+				<br>
+				<div class="wcs_popup_header_description">Click one of our representatives below</div>
+			</div>	
+			<div class="wcs_popup_person_container">
+                {% for picture in uploaded_image %}
+                {% if picture.id == 23 %}
+				<div class="wcs_popup_person" data-number="{{picture.contact_us}}">
+					<div class="wcs_popup_person_img">
+                        <img src="{{picture.picture.url}}" alt=""></div>
+                {% endif %}
+                {% endfor %} 
+                    <div class="wcs_popup_person_content">
+						<div class="wcs_popup_person_name">ICT Consultant</div>
+						<div class="wcs_popup_person_description">Portal Support</div>
+						<div class="wcs_popup_person_status">I'm Online</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+    
+	</div>
+<div id="myModal1" class="modal fade" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header modal-header-small">
+        <button type="button" class="close closebtnmodal" data-dismiss="modal">×</button>
+        <h4>Scanner</h4> 
+      </div>
+      <div class="container-fluid">
+          <div id="scanner-holder" class="position-relative">
+              <video id="scanner"></video>
+              <div id="scanner-focus" class="position-absolute"></div>
+          </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+<div id="myModal2" class="modal fade" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+     <!-- Modal content-->
+     <div class="modal-content">
+        <div class="modal-header modal-header-small">
+          <button type="button" class="close closebtnmodal" data-dismiss="modal">×</button>
+          <h4>Login into eLearning</h4> 
+        </div>
+         <form action="" method="post" class="onlineform" id="checkstatusform">
+            <div class="modal-body">
+              {% csrf_token %}
+              <div class="form-group">
+              <label>Username</label><small class="req"> *</small> 
+                 <input type="username" required="" class="form-control" name="refno" id="refno" autocomplete="off">
+                   <span class="text-danger" id="error_refno"></span>
+                   <label>Password</label><small class="req"> *</small> 
+                   <input type="password" required="" class="form-control" name="refno" id="refno" autocomplete="off">
+                     <span class="text-danger" id="error_refno"></span>
+              </div>
+               <span class="text-danger" id="invaliderror"></span>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="modalclosebtn btn  mdbtn" data-dismiss="modal">Close</button>
+              <button type="submit" name="status" class="onlineformbtn mdbtn">Submit</button>            
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="myModal2" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+      </form>
+    </div>
+  </div>
+</div>
+<footer>
+            <div class="container spacet40 spaceb40">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <h3 class="fo-title">Quick Links</h3>
+                        <ul class="f1-list">
+                            <li class="">
+                                <a href="">Home</a>
+                            </li>
+                            <li class="">
+                                <a href="">Admission Requirement</a>
+                            </li>
+                            <li class="">
+                                <a href="" onclick="openmodal2();" data-toggle="modal" data-target="#myModal">eLearning</a>
+                            </li>
+                            <li class="">
+                                <a href="">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--./col-md-3-->
+
+                    <div class="col-md-4 col-sm-6">
+                        <h3 class="fo-title">Follow Us</h3>
+                        <ul class="company-social">
+                            <li>       {% for picture in uploaded_image %}
+                                       {% if picture.id == 24 %}
+                                        <a href="https://facebook.com/{{picture.event_feed}}" target="_blank"><img style="height: 40px; width: 40px; margin-right: 30px;" src="./static/img/facebook.png" alt=""></a>
+                                    </li>
+
+                                    <li> 
+                                        <a href="https://twitter.com/{{picture.news_feed}}" target="_blank"><img style="height: 40px; width: 40px; margin-right: 30px;" src="./static/img/twiter.png" alt=""></a>
+                                    </li>
+
+                                    <li> 
+                                        <a href="https://www.linkedin.com/{{picture.contact_us}}" target="_blank"><img style="height: 40px; width: 40px; margin-right: 30px;" src="./static/img/linkin.png" alt=""></a>
+                                    </li>
+
+                                    <li> {% elif picture.id == 25 %}
+                                        <a href="https://www.instagram.com/{{picture.event_feed}}" target="_blank"><img style="height: 40px; width: 40px; margin-right: 30px;" src="./static/img/instagram.png" alt=""></a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %} 
+                        </ul>
+                    </div>
+                    <!--./col-md-3-->
+
+                    <div class="col-md-4 col-sm-6">
+                        <h3 class="fo-title">Feedback</h3>
+                        <div class="complain">
+                            <a href=""><i class="fa fa-pencil-square-o i-plain"></i>Complain</a>
+                        </div>
+
+                        <!-- <li><i class="fa fa-pencil-square-o i-plain"></i>
+          <div class="he-text">Feedback<span><a href="https://demo.smart-school.in/page/complain">Complain</a></span>
+          </div>
+      </li> -->
+                    </div>
+                </div>
+                <!--./row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="infoborderb"></div>
+
+                        <div class="col-md-4">
+                            <div class="contacts-item">
+                                <div  class="cleft"><i style="background-color: antiquewhite;" class="i-plain"><img height="25px" width="25px" src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/phone.svg' %} "></i></div>
+                                <div class="cright">
+                                    {% for picture in uploaded_image %}
+                                    {% if picture.id == 10 %}
+                                    <a href="#" class="content-title">Contact</a>
+                                    <p href="#" class="content-title">{{picture.event_feed}}</p>
+                                    {%endif%}
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="contacts-item">
+                                <div class="cleft"><i class="fa fa-envelope"></i></div>
+                                <div class="cright">
+                                    {% for picture in uploaded_image %}
+                                    {% if picture.id == 10 %}
+                                    <a href="#" class="content-title">Email Us</a>
+                                    <p><a href="mailto:{{picture.contact_us}}" class="content-title">{{picture.contact_us}}</a></p>
+                                    {%endif%}
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="contacts-item">
+                                <div class="cleft"><img height="40" width="40" style="background-color: aliceblue;" src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/pin.svg' %}"></div>
+                                <div class="cright">
+                                    {% for picture in uploaded_image %}
+                                    {% if picture.id == 10 %}
+                                    <a href="" class="content-title">Address</a>
+                                    <p class="sub-title">{{picture.news_feed}}</p>
+                                    {%endif%}
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <a class="twitter-timeline" data-tweet-limit="1" href=""></a>
+                        </div>
+                        <!--./col-md-3-->
+                    </div>
+                </div>
+            </div>
+            <!--./container-->
+
+            <div class="copy-right">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <p ><a style="color: antiquewhite;" href="https://miraculous-man.github.io">© Mk-global tech. All rights reserved</a></p>
+                        </div>
+                    </div>
+                    <!--./row-->
+                </div>
+                <!--./container-->
+            </div>
+            <!--./copy-right-->
+        </footer>
+        <a class="scrollToTop" href="https://www.sfp.edu.ng/#"><i class="fa fa-angle-up"></i></a>
+
+        <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/bootstrap.min.js.download'%}"></script>
+        <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/owl.carousel.min.js.download'%}"></script>
+        <script type="text/javascript" src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/jquery.waypoints.min.js.download'%}"></script>
+        <script type="text/javascript" src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/jquery.counterup.min.js.download'%}"></script>
+        <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/ss-lightbox.js.download'%}"></script>
+        <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/custom.js.download'%}"></script>
+        <!-- Include Date Range Picker -->
+        <script type="text/javascript" src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/bootstrap-datepicker.min.js.download'%}"></script>
+
+	    <!-- Plugin JS file -->
+	    <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/moment.min(1).js.download'%}"></script>
+	    <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/moment-timezone-with-data.min.js.download'%}"></script>
+        <script src="{% static './___ Sure Foundation Polytechnic, Ukanafun, Akwa Ibom State __._files/whatsapp-chat-support.js.download'%}"></script>
+
+	<script>
+		$('#example_1').whatsappChatSupport({
+			debug: true,
+		});
+
+		$('#example_2').whatsappChatSupport({
+			defaultMsg: '',
+		});
+
+		$('#example_3').whatsappChatSupport();
+	</script>
+ <script>
+    const args = {
+        video: document.getElementById('scanner'),
+        mirror: false
+    };
+
+    window.URL.createObjectURL = (stream) => {
+        args.video.srcObject = stream;
+        return stream;
+    };
+
+    const scanner = new Instascan.Scanner(args);
+    scanner.addListener('scan', function(content) {
+        // alert(content);
+        $('.modal').modal('hide')
+        start_loader()
+        setTimeout(() => {
+            uni_modal("View Employee Details", "{% url 'scanned-code' %}/" + content, 'modal-md')
+            scanner.stop()
+        }, 500)
+    });
+    $('#uni_modal').on('shown.bs.modal', function() {
+        if ($('#scanner').length > 0) {
+            scanner.stop()
+            Instascan.Camera.getCameras().then(function(cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error('No cameras found.');
+                }
+            }).catch(function(e) {
+                console.error(e);
+            });
+        }
+    })
+    $('#uni_modal').on('hide.bs.modal', function() {
+        scanner.stop()
+    })
+</script>
+        <script type="text/javascript">
+            $(function () {
+                jQuery("img.svg").each(function () {
+                    var $img = jQuery(this);
+                    var imgID = $img.attr("id");
+                    var imgClass = $img.attr("class");
+                    var imgURL = $img.attr("src");
+
+                    jQuery.get(
+                        imgURL,
+                        function (data) {
+                            // Get the SVG tag, ignore the rest
+                            var $svg = jQuery(data).find("svg");
+
+                            // Add replaced image's ID to the new SVG
+                            if (typeof imgID !== "undefined") {
+                                $svg = $svg.attr("id", imgID);
+                            }
+                            // Add replaced image's classes to the new SVG
+                            if (typeof imgClass !== "undefined") {
+                                $svg = $svg.attr("class", imgClass + " replaced-svg");
+                            }
+
+                            // Remove any invalid XML tags as per http://validator.w3.org
+                            $svg = $svg.removeAttr("xmlns:a");
+
+                            // Check if the viewport is set, else we gonna set it if we can.
+                            if (!$svg.attr("viewBox") && $svg.attr("height") && $svg.attr("width")) {
+                                $svg.attr("viewBox", "0 0 " + $svg.attr("height") + " " + $svg.attr("width"));
+                            }
+
+                            // Replace image with new SVG
+                            $img.replaceWith($svg);
+                        },
+                        "xml"
+                    );
+                });
+            });
+        </script>
+<script>
+$('button[id="eLogin"]').prop("disabled", true);
+ $(document).ready(function(){  
+   $('#uname').blur(function(){
+
+     var username = $(this).val();
+
+     $.ajax({
+      url:'{% url "login1" %}',
+      method:"POST",
+      data:{uname:username},
+      success:function(data)
+      {
+       if(data != 0)
+       {
+        $('#uname_error').html('<span class="text-success">username:</span>');
+        $('#eLogin').attr("disabled", false);
+       }
+       else
+       {
+        $('#uname_error').html('<span class="text-danger">username not available</span>');
+        $('#eLogin').attr("disabled", true);
+       }
+      }
+     })
+
+  });
+ });  
+</script>
+<script>  
+ $(document).ready(function(){  
+   $('#pword').blur(function(){
+
+     var password = $(this).val();
+
+     $.ajax({
+        url:'{% url "login1" %}',
+        method:"POST",
+      data:{pword:password},
+      success:function(data)
+      {
+       if(data != 0)
+       {
+        $('#pword_error').html('<span class="text-success">password:</span>');
+        $('#eLogin').attr("disabled", false);
+       }
+       else
+       {
+        $('#pword_error').html('<span class="text-danger">check password</span>');
+        $('#eLogin').attr("disabled", true);
+       }
+      }
+     })
+
+  });
+ });  
+</script>
+    
+
+</body></html>

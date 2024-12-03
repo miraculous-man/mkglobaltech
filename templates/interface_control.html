@@ -1,0 +1,86 @@
+{% extends 'registration/registration_base.html' %}
+{% block title %} Interface control {% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container py-5">
+	
+  <div class="blue-gradient text-light p-3 mb-5">
+	  <h1 class="lead my-0">
+      <a href="{% url 'home' %}" class="primary1">Home ></a>
+		<i class="fas fa-lock mr-2"></i>upload Userinterface
+	  </h1>
+  </div>
+
+  <form action="" method="POST" id="login-form" enctype="multipart/form-data">
+	  {% csrf_token %}
+	  <div class="row">
+		  <div class="col-lg-6">
+			<h1 class="lead p-2 bg-light">Controls Form</h1>
+			{% if form.errors %}
+          <p class="text-danger my-2"><i class="fas fa-exclamation-circle"></i> file not Uploaded.</p><br>
+    		{% endif %}
+	    <div class="mb-3">
+				<label for="picture" class="form-label">{{ form.picture.label }}</label>
+				<p>{{ form.picture }}</p>
+				<div id="message-wrapper"></div>
+			</div>
+			<div class="mb-3">
+				<label for="news_feed" class="form-label">{{ form.news_feed.label }}</label>
+				<p>{{ form.news_feed }}</p>
+				<div id="message-wrapper"></div>
+			</div>
+			<div class="mb-3">
+				<label for="event_feed" class="form-label">{{ form.event_feed.label }}</label>
+				{{ form.event_feed }}
+			</div>
+			<div class="mb-3">
+				<label for="" class="DESCRIPTION">DESCRIPTION</label>
+				{{ form.contact_us }}
+			</div>
+			
+		  </div>
+		 
+
+    <button type="submit" class="btn btn-primary" id="login-btn"><i class="fas fa-sign-in-alt"></i><small>UPLOAD</small></button>
+  </form>
+  <br>
+</div>
+{% endblock content %}
+
+{% block js %}
+
+<script>
+  const loginFormEl = document.getElementById('login-form');
+  const loginBtnEl = document.getElementById('login-btn');
+
+  loginFormEl.addEventListener('submit', () => {
+    loginBtnEl.innerHTML = '<i class="fas fa-sign-in-alt"></i> uploading . . .';
+    loginBtnEl.classList.add("disabled");
+  })
+
+  $("#username_id").on("input", function () {
+    username = $(this).val();
+
+    $.ajax({
+      url: "/accounts/ajax/validate-username/",
+      data: {
+        username: username
+      },
+      dataType: 'json',
+      success: function (data) {
+        if (data.is_taken) {
+          console.log(data.is_taken);
+          $('#message-wrapper').html(`<p class="my-2 text-danger"><span class="bg-error p-2"><b>${username}</b> already taken :( try another one </span></p>`)
+        }
+        else {
+          $('#message-wrapper').html(`<p class="my-2 text-success"><span class="bg-correct p-2"><b>${username}</b> is valid </span></p>`)
+        }
+      }
+
+    })
+  })
+</script>
+{% endblock %}
